@@ -14,279 +14,333 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="Hatayhasadi-SeffafLogo2_1.PNG">
 <link rel="apple-touch-icon" href="Hatayhasadi-SeffafLogo2_1.PNG">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg:       #FCFBF8;
-    --soft:     #F5F1E8;
-    --card:     #FFFFFF;
-    --ink:      #26221B;
-    --text:     #44403A;
-    --muted:    #78716C;
-    --line:     #E7E2D7;
-    --green:    #4A6B2A;
-    --green-dk: #3A5520;
-    --green-bg: #EEF3E6;
-    --gold:     #9C7C3C;
-    --wa:       #1FAF54;
-    --wa-dk:    #17913F;
-    --radius:   12px;
-    --shadow:   0 1px 3px rgba(38,34,27,0.06), 0 8px 24px -12px rgba(38,34,27,0.12);
+    --cream:    #F7F2E8;
+    --cream-dk: #EDE5D0;
+    --green:    #5C7A2E;
+    --green-dk: #3E5420;
+    --brown:    #3D2B1F;
+    --brown-lt: #7A5C3E;
+    --gold:     #C4963A;
+    --gold-lt:  #E8C97A;
+    --text:     #2D1F10;
+    --text-lt:  #6B4E35;
+    --white:    #FFFFFF;
   }
   html { scroll-behavior: smooth; }
-  section, header.hero { scroll-margin-top: 84px; }
-  body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-  img { max-width: 100%; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
-  /* ── TOPBAR ── */
-  .topbar { background: var(--ink); color: #E8E2D7; text-align: center; padding: 0.5rem 1rem; font-size: 13px; font-weight: 500; }
-  .topbar b { color: #fff; font-weight: 700; }
+  /* NAV */
+  /* Logo */
+.nav-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
 
-  /* ── NAV ── */
-  nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 2.5rem; background: rgba(252,251,248,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
-  .nav-logo-img { height: 60px; width: auto; display: block; }
-  .nav-brand-text { line-height: 1.2; }
-  .nav-brand-text strong { display: block; font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
-  .nav-brand-text span { font-size: 11px; color: var(--green); font-weight: 600; }
-  .nav-links { display: flex; gap: 1.9rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; font-size: 14.5px; font-weight: 600; color: var(--text); transition: color 0.2s; }
+.nav-logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(61, 43, 31, 0.1));
+  transition: transform 0.3s ease;
+ 
+  /* mix-blend-mode: multiply; */
+}
+
+.nav-brand:hover .nav-logo-img {
+  transform: rotate(-5deg) scale(1.05);
+}
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0.60rem 2.5rem; background: rgba(247,242,232,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(92,122,46,0.15); }
+  .nav-brand { display: flex; align-items: center; gap: 0.1rem; text-decoration: none; }
+  .nav-logo-badge { display: none; }
+  .nav-brand-text { line-height: 1.1; }
+  .nav-brand-text strong { display: block; font-family: 'Playfair Display', serif; font-size: 28px; color: var(--brown); letter-spacing: 0.5px; }
+  .nav-brand-text span { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--green); font-weight: 700; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-lt); transition: color 0.2s; }
   .nav-links a:hover { color: var(--green); }
-  .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 0.65rem 1.4rem; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+  .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 0.55rem 1.25rem; border-radius: 24px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: background 0.2s; }
   .nav-cta:hover { background: var(--green-dk); }
 
-  /* ── BUTTONS ── */
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0.85rem 1.75rem; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
-  .btn-green { background: var(--green); color: #fff; }
-  .btn-green:hover { background: var(--green-dk); }
-  .btn-wa { background: var(--wa); color: #fff; }
-  .btn-wa:hover { background: var(--wa-dk); }
-  .btn-outline { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
-  .btn-outline:hover { border-color: var(--green); color: var(--green); }
-  .icon-wa { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--cream); padding: 7rem 2rem 4rem; }
+  .hero-bg-pattern { position: absolute; inset: 0; opacity: 0.04; background-image: repeating-linear-gradient(45deg, var(--brown) 0, var(--brown) 1px, transparent 0, transparent 50%); background-size: 20px 20px; }
+  .hero-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(92,122,46,0.12); }
+  .hero-circle-1 { width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-circle-2 { width: 800px; height: 800px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-circle-3 { width: 1000px; height: 1000px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-inner { position: relative; z-index: 2; text-align: center; max-width: 720px; }
+    /* HERO COLLAGE */
+  .hero-collage { position: absolute; top: 50%; transform: translateY(-50%); z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
+  .hero-collage-left { left: 2.5%; }
+  .hero-collage-right { right: 2.5%; }
+  .collage-card { border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(61,43,31,0.12); border: 3px solid rgba(255,255,255,0.7); transition: transform 0.4s ease; }
+  .collage-card:hover { transform: scale(1.04); }
+  .collage-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .hero-collage-left .collage-card:nth-child(1) { width: 140px; height: 100px; transform: rotate(-4deg); margin-left: 10px; }
+  .hero-collage-left .collage-card:nth-child(2) { width: 160px; height: 120px; transform: rotate(2deg); margin-left: -5px; }
+  .hero-collage-left .collage-card:nth-child(3) { width: 130px; height: 95px; transform: rotate(-2deg); margin-left: 20px; }
+  .hero-collage-right .collage-card:nth-child(1) { width: 130px; height: 95px; transform: rotate(3deg); margin-left: auto; margin-right: 10px; }
+  .hero-collage-right .collage-card:nth-child(2) { width: 160px; height: 120px; transform: rotate(-3deg); margin-left: auto; }
+  .hero-collage-right .collage-card:nth-child(3) { width: 140px; height: 100px; transform: rotate(2deg); margin-left: auto; margin-right: 15px; }
+  @media (max-width: 1200px) {
+    .hero-collage-left .collage-card, .hero-collage-right .collage-card { transform: scale(0.85); }
+    .hero-collage-left { left: 1%; }
+    .hero-collage-right { right: 1%; }
+  }
+  @media (max-width: 1024px) { .hero-collage { display: none; } }
+  .hero-tag { display: inline-block; margin-bottom: 1.25rem; background: var(--green-dk); color: var(--gold-lt); padding: 0.35rem 1.25rem; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem,6vw,4.5rem); font-weight: 700; line-height: 1.1; color: var(--brown); margin-bottom: 1.25rem; letter-spacing: -1px; }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero p { font-size: 1.15rem; color: var(--text-lt); margin-bottom: 2.25rem; font-weight: 400; line-height: 1.8; }
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #fff; padding: 0.9rem 2rem; border-radius: 30px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--green-dk); transform: translateY(-1px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--brown); padding: 0.9rem 2rem; border-radius: 30px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; border: 2px solid rgba(61,43,31,0.25); transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--brown); }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(92,122,46,0.2); }
+  .hero-stat { text-align: center; }
+  .hero-stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--green); }
+  .hero-stat span { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-lt); }
 
-  /* ── HERO ── */
-  .hero { padding: 4rem 2.5rem 4.5rem; }
-  .hero-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 4rem; align-items: center; }
-  .hero-tag { display: inline-block; background: var(--green-bg); color: var(--green-dk); padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 13px; font-weight: 700; margin-bottom: 1.25rem; }
-  .hero h1 { font-size: clamp(2.1rem, 4.5vw, 3.3rem); font-weight: 800; line-height: 1.14; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 1.1rem; }
-  .hero h1 span { color: var(--green); }
-  .hero p { font-size: 1.06rem; color: var(--muted); margin-bottom: 1.9rem; max-width: 480px; }
-  .hero-buttons { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 2.25rem; }
-  .hero-points { display: flex; flex-direction: column; gap: 0.55rem; }
-  .hero-point { display: flex; align-items: center; gap: 0.65rem; font-size: 14.5px; font-weight: 600; color: var(--text); }
-  .check { width: 20px; height: 20px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .check svg { width: 11px; height: 11px; stroke: currentColor; stroke-width: 3; fill: none; }
-  .hero-photo { position: relative; }
-  .hero-photo img { width: 100%; height: 480px; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow); display: block; }
-  .hero-badge { position: absolute; left: 1.25rem; bottom: 1.25rem; background: #fff; border-radius: 12px; padding: 0.8rem 1.1rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.8rem; }
-  .hero-badge img { width: 44px; height: 44px; object-fit: contain; }
-  .hero-badge strong { display: block; font-size: 13.5px; color: var(--ink); line-height: 1.3; }
-  .hero-badge span { font-size: 12px; color: var(--muted); }
 
-  /* ── TRUST STRIP ── */
-  .trust { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--card); }
-  .trust-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
-  .trust-item { display: flex; align-items: center; gap: 0.85rem; padding: 1.25rem 1.5rem; }
-  .trust-item + .trust-item { border-left: 1px solid var(--line); }
-  .trust-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .trust-icon svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .trust-item strong { display: block; font-size: 14px; color: var(--ink); line-height: 1.35; }
-  .trust-item span { font-size: 12.5px; color: var(--muted); }
+  /* SECTION COMMON */
+  section { padding: 6rem 2rem; }
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--green); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,2.8rem); font-weight: 700; color: var(--brown); line-height: 1.2; margin-bottom: 1rem; }
+  .section-sub { font-size: 1.05rem; color: var(--text-lt); font-weight: 300; max-width: 600px; line-height: 1.8; }
+  .container { max-width: 1140px; margin: 0 auto; }
 
-  /* ── SECTIONS ── */
-  section { padding: 4.5rem 2.5rem; }
-  .container { max-width: 1160px; margin: 0 auto; }
-  .sec-head { max-width: 640px; margin-bottom: 2.75rem; }
-  .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-  .sec-label { font-size: 13px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-  .sec-title { font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.7rem; }
-  .sec-sub { font-size: 1rem; color: var(--muted); }
+  /* MARQUEE */
+  .marquee-strip { background: var(--green-dk); color: var(--gold-lt); padding: 0.75rem 0; overflow: hidden; white-space: nowrap; }
+  .marquee-inner { display: inline-flex; gap: 3rem; animation: marquee 25s linear infinite; }
+  .marquee-inner span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 0 1rem; }
+  .marquee-inner span::before { content: '✦'; margin-right: 1rem; opacity: 0.6; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ── PRODUCTS ── */
-  #urunler { background: var(--soft); }
-  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1.4rem; }
-  .product-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.25s, transform 0.25s; }
-  .product-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-  .product-img { height: 210px; overflow: hidden; background: var(--soft); }
-  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .product-body { padding: 1.15rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
-  .product-badge { display: inline-block; align-self: flex-start; background: var(--green-bg); color: var(--green-dk); font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 0.6rem; }
-  .product-name { font-size: 1.12rem; font-weight: 800; color: var(--ink); margin-bottom: 0.25rem; letter-spacing: -0.01em; }
-  .product-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-  .price-box { background: var(--soft); border-radius: 10px; padding: 0.7rem 0.9rem; margin-top: auto; margin-bottom: 0.9rem; }
-  .price-row { display: flex; align-items: baseline; justify-content: space-between; padding: 3px 0; }
-  .price-size { font-size: 13px; font-weight: 700; color: var(--text); }
-  .price-val { display: flex; align-items: baseline; gap: 8px; }
-  .price-old { font-size: 12.5px; color: var(--muted); text-decoration: line-through; }
-  .price-new { font-size: 16.5px; font-weight: 800; color: var(--green-dk); }
-  .product-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; padding: 0.7rem 1rem; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
-  .product-btn:hover { background: var(--green-dk); }
-  .product-card.soon { border-style: dashed; }
-  .product-card.soon .product-btn { background: var(--gold); }
+  /* PRODUCTS */
+  #urunler { background: var(--white); }
+  .products-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+   .info-note { background: linear-gradient(135deg, rgba(92,122,46,0.08), rgba(196,150,58,0.08)); border-left: 4px solid var(--green); border-radius: 0 12px 12px 0; padding: 1rem 1.5rem; margin-top: 1.25rem; max-width: 600px; font-size: 13.5px; color: var(--text); line-height: 1.7; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+  .product-card { background: var(--cream); border: 1px solid rgba(92,122,46,0.12); border-radius: 16px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: default; }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,43,31,0.1); }
+  .product-icon-wrap { height: 265px; display: flex; align-items: center; justify-content: center; font-size: 64px; background: linear-gradient(145deg, var(--cream-dk), var(--cream)); border-bottom: 1px solid rgba(92,122,46,0.1); }
+  .product-icon-wrap img { width: 100%;height: 100%; object-fit: cover; border-radius: 8px;}
+ 
+  .product-body { padding: 1.1rem 1.25rem 1.25rem; }
+  .product-badge { display: inline-block; margin-bottom: 0.5rem; background: rgba(92,122,46,0.12); color: var(--green); padding: 2px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--brown); margin-bottom: 0.35rem; line-height: 1.3; }
+  .product-desc { font-size: 14px; color: var(--text-lt); line-height: 1.6; margin-bottom: 0.75rem; }
+  .product-order-btn { background: var(--green); color: #fff; border: none; padding: 0.45rem 1rem; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .product-order-btn:hover { background: var(--green-dk); }
 
-  /* ── ZEYTİNYAĞI ── */
-  #one-cikan { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .oil-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: center; }
-  .oil-stage { background: var(--soft); border-radius: 18px; padding: 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: center; gap: 1.5rem; }
-  .oil-front { max-height: 380px; width: auto; }
-  .oil-back-wrap { text-align: center; }
-  .oil-back { width: 110px; border-radius: 8px; border: 1px solid var(--line); }
-  .oil-back-cap { font-size: 11.5px; color: var(--muted); margin-top: 6px; font-weight: 600; }
-  .oil-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0 1.75rem; }
-  .oil-chip { font-size: 12.5px; font-weight: 700; color: var(--green-dk); background: var(--green-bg); padding: 5px 13px; border-radius: 999px; }
-  .oil-buy { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; background: var(--soft); border-radius: 12px; padding: 1.1rem 1.4rem; }
-  .oil-price { font-size: 1.9rem; font-weight: 800; color: var(--ink); line-height: 1.1; }
-  .oil-price small { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+  /* PRICING STYLES - NEW */
+  .product-sizes { border-top: 1px solid rgba(61,43,31,0.1); padding-top: 0.65rem; }
+  .size-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(61,43,31,0.05); }
+  .size-row:last-child { border-bottom: none; }
+  .size-label { font-size: 12px; color: var(--text-lt); font-weight: 700; min-width: 40px; }
+  .size-prices { display: flex; align-items: center; gap: 6px; }
+  .old-price { font-size: 11px; color: var(--text-lt); text-decoration: line-through; text-decoration-color: #e53935; text-decoration-thickness: 1.5px; }
+  .new-price { font-size: 14px; font-weight: 700; color: var(--green); }
+  .disc-tag { font-size: 9px; font-weight: 700; background: #e53935; color: #fff; padding: 1px 5px; border-radius: 8px; }
+  .order-row { display: flex; justify-content: flex-end; padding-top: 8px; }
 
-  /* ── ABOUT ── */
-  .about-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .about-photo { width: 100%; height: 420px; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow); }
-  .about-text p { color: var(--muted); font-size: 0.98rem; margin-bottom: 1.5rem; }
-  .about-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-  .about-list li { display: flex; gap: 0.75rem; align-items: flex-start; }
-  .about-list strong { display: block; font-size: 14.5px; color: var(--ink); }
-  .about-list span { font-size: 13.5px; color: var(--muted); }
-  .about-list .check { margin-top: 3px; }
-
-  /* ── STEPS ── */
-  #nasil-siparis { background: var(--soft); }
-  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2.75rem; }
-  .step-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.4rem; }
-  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #fff; font-size: 15px; font-weight: 800; margin-bottom: 0.9rem; }
-  .step-card h3 { font-size: 15.5px; font-weight: 800; color: var(--ink); margin-bottom: 0.35rem; }
-  .step-card p { font-size: 13.5px; color: var(--muted); }
-  .steps-cta { text-align: center; }
-  .steps-cta .btn { font-size: 16px; padding: 1rem 2.2rem; }
-  .steps-note { font-size: 13px; color: var(--muted); margin-top: 0.9rem; }
-
-  /* ── PRICING ── */
-  .promo { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--green-bg); border: 1px solid #D8E3C6; border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 1.75rem; }
-  .promo strong { font-size: 15.5px; color: var(--green-dk); }
-  .promo span { font-size: 13.5px; color: var(--text); }
-  .promo-tag { background: var(--green); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
-  .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
-  .pricing-tbl { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
-  .pricing-tbl thead th { background: var(--ink); color: #fff; padding: 12px 18px; text-align: left; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .pricing-tbl thead th:not(:first-child) { text-align: right; }
-  .pricing-tbl tbody tr { border-bottom: 1px solid var(--line); }
+  /* PRICING TABLE */
+  .promo-banner { background: linear-gradient(135deg, var(--green-dk), var(--green)); color: #fff; border-radius: 12px; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .promo-banner strong { font-size: 1.1rem; font-family: 'Playfair Display', serif; }
+  .promo-banner span { font-size: 13px; opacity: 0.85; }
+  .promo-badge { background: #e53935; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.5px; }
+  .pricing-tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 1.5rem; border-radius: 12px; overflow: hidden; }
+  .pricing-tbl thead th { background: var(--green); color: #fff; padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+  .pricing-tbl thead th:not(:first-child) { text-align: center; }
+  .pricing-tbl tbody tr { border-bottom: 1px solid rgba(61,43,31,0.07); }
+  .pricing-tbl tbody tr:hover td { background: rgba(92,122,46,0.04); }
   .pricing-tbl tbody tr:last-child { border-bottom: none; }
-  .pricing-tbl tbody tr:hover td { background: var(--soft); }
-  .pricing-tbl td { padding: 11px 18px; vertical-align: middle; }
-  .pricing-tbl td:not(:first-child) { text-align: right; white-space: nowrap; }
-  .prd-name { font-weight: 700; color: var(--ink); }
-  .prd-badge { font-size: 11px; font-weight: 700; background: var(--green-bg); color: var(--green-dk); padding: 2px 8px; border-radius: 999px; margin-left: 8px; }
-  .pc .o { font-size: 12.5px; text-decoration: line-through; color: var(--muted); margin-right: 8px; }
-  .pc .n { font-size: 15px; font-weight: 800; color: var(--green-dk); }
-  .tbl-note { font-size: 13px; color: var(--muted); margin-top: 1.1rem; text-align: center; }
-  .tbl-cta { text-align: center; margin-top: 1.75rem; }
+  .pricing-tbl td { padding: 11px 16px; vertical-align: middle; }
+  .pricing-tbl td:not(:first-child) { text-align: center; }
+  .prd-name { font-weight: 700; color: var(--brown); font-size: 13px; }
+  .prd-badge { font-size: 9px; font-weight: 700; background: rgba(92,122,46,0.12); color: var(--green); padding: 1px 5px; border-radius: 6px; margin-left: 4px; }
+  .pc .o { font-size: 11px; text-decoration: line-through; text-decoration-color: #e53935; text-decoration-thickness: 1.5px; color: var(--text-lt); display: block; line-height: 1.4; }
+  .pc .n { font-size: 15px; font-weight: 700; color: var(--green); line-height: 1.4; }
+  .pc .d { font-size: 9px; background: #e53935; color: #fff; border-radius: 6px; padding: 1px 4px; display: inline-block; margin-top: 1px; }
+  .tbl-note { font-size: 12px; color: var(--text-lt); margin-top: 1rem; text-align: center; }
 
-  /* ── TESTIMONIALS ── */
-  #yorumlar { background: var(--soft); }
-  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.4rem; }
-  .testimonial-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
-  .stars { color: #E8A93C; font-size: 15px; letter-spacing: 2px; margin-bottom: 0.7rem; }
-  .testimonial-text { font-size: 14.5px; color: var(--text); margin-bottom: 1.1rem; }
+  /* ABOUT */
+  #hakkimizda { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .about-visual { position: relative; padding: 2rem; background: var(--cream-dk); border-radius: 24px; display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgba(92,122,46,0.15); }
+  .about-icon-row { display: flex; gap: 1rem; }
+  .about-icon-card { flex: 1; background: var(--white); border-radius: 12px; padding: 1.25rem; text-align: center; border: 1px solid rgba(92,122,46,0.1); }
+  .about-icon-card .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  .about-icon-card strong { display: block; font-size: 12px; font-weight: 700; color: var(--brown); }
+  .about-icon-card span { font-size: 11px; color: var(--text-lt); }
+  .about-quote { background: var(--green); color: var(--cream); border-radius: 12px; padding: 1.25rem 1.5rem; font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; line-height: 1.6; }
+  .about-content { display: flex; flex-direction: column; gap: 1.25rem; }
+  .about-feature { display: flex; gap: 1rem; align-items: flex-start; }
+  .about-feature-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(92,122,46,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .about-feature-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--brown); }
+  .about-feature-text span { font-size: 13px; color: var(--text-lt); }
+
+  /* HOW TO ORDER */
+  #nasil-siparis { background: var(--green-dk); color: #fff; }
+  #nasil-siparis .section-label { color: var(--gold-lt); }
+  #nasil-siparis .section-title { color: #fff; }
+  #nasil-siparis .section-sub { color: rgba(255,255,255,0.7); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .step-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.75rem 1.5rem; position: relative; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.1); position: absolute; top: 1rem; right: 1.25rem; line-height: 1; }
+  .step-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .step-card h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .whatsapp-cta { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; margin-top: 3.5rem; text-align: center; }
+  .whatsapp-btn { display: inline-flex; align-items: center; gap: 12px; background: #25D366; color: #fff; padding: 1rem 2.5rem; border-radius: 50px; font-size: 16px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .whatsapp-btn:hover { background: #1ebe5d; transform: scale(1.02); }
+  .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; }
+  .whatsapp-note { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  /* TESTIMONIALS */
+  #yorumlar { background: var(--cream-dk); }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testimonial-card { background: var(--white); border-radius: 16px; padding: 1.5rem; border: 1px solid rgba(92,122,46,0.1); }
+  .testimonial-stars { color: var(--gold); font-size: 14px; margin-bottom: 0.75rem; }
+  .testimonial-text { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--text); line-height: 1.7; margin-bottom: 1rem; }
   .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
-  .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
-  .t-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
-  .t-role { font-size: 12.5px; color: var(--muted); }
+  .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; }
+  .testimonial-name { font-size: 13px; font-weight: 700; color: var(--brown); }
+  .testimonial-role { font-size: 11px; color: var(--text-lt); }
 
-  /* ── B2B ── */
-  .b2b-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
-  .b2b-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin: 1.5rem 0 1.9rem; }
-  .b2b-list li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 14.5px; color: var(--text); font-weight: 500; }
-  .b2b-list .check { margin-top: 3px; }
-  .b2b-card { background: var(--ink); color: #E8E2D7; border-radius: 18px; padding: 2.25rem 2rem; }
-  .b2b-card h3 { font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 0.7rem; }
-  .b2b-card p { font-size: 14px; color: rgba(232,226,215,0.8); margin-bottom: 1.4rem; }
-  .b2b-card .small { font-size: 12.5px; color: rgba(232,226,215,0.55); }
+  /* B2B */
+  #toplu-siparis { background: var(--cream); }
+  .b2b-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  @media (max-width: 768px) { .b2b-inner { grid-template-columns: 1fr; } }
+  .b2b-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+  .b2b-list li { display: flex; align-items: center; gap: 0.75rem; font-size: 14px; color: var(--text); }
+  .b2b-list li::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .b2b-card { background: var(--brown); color: var(--cream); border-radius: 24px; padding: 2.5rem; position: relative; overflow: hidden; }
+  .b2b-card::before { content: '"'; position: absolute; top: -0.5rem; left: 1.5rem; font-family: 'Playfair Display', serif; font-size: 8rem; color: rgba(255,255,255,0.06); line-height: 1; }
+  .b2b-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gold-lt); }
+  .b2b-card p { font-size: 14px; line-height: 1.7; color: rgba(247,242,232,0.75); margin-bottom: 1.5rem; }
+  .b2b-card-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 0.75rem 1.5rem; border-radius: 24px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+  .b2b-card-cta:hover { background: var(--green-dk); }
 
-  /* ── FOOTER ── */
-  footer { background: var(--ink); color: rgba(232,226,215,0.75); padding: 3.5rem 2.5rem 1.75rem; }
-  .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 3rem; margin-bottom: 2.5rem; }
-  .footer-brand { flex: 1.5; min-width: 220px; }
-  .footer-brand h3 { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem; }
-  .footer-brand p { font-size: 13.5px; max-width: 300px; }
-  .footer-col { flex: 1; min-width: 150px; }
-  .footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
-  .footer-col a { display: block; font-size: 13.5px; color: rgba(232,226,215,0.7); text-decoration: none; margin-bottom: 0.55rem; transition: color 0.2s; }
-  .footer-col a:hover { color: #fff; }
-  .footer-bottom { max-width: 1160px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; flex-wrap: wrap; gap: 0.5rem; }
+  /* FOOTER */
+  footer { background: var(--brown); color: rgba(247,242,232,0.7); padding: 3rem 2rem 2rem; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 3rem; margin-bottom: 2rem; }
+  .footer-brand { flex: 1.5; min-width: 200px; }
+  .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; }
+  .footer-col { flex: 1; min-width: 140px; }
+  .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--cream); margin-bottom: 1rem; }
+  .footer-col a { display: block; font-size: 13px; color: rgba(247,242,232,0.6); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold-lt); }
+  .footer-bottom { max-width: 1140px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 12px; flex-wrap: wrap; gap: 0.5rem; }
 
-  /* ── FLOATING WHATSAPP ── */
-  .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; align-items: center; gap: 10px; background: var(--wa); color: #fff; padding: 0.85rem 1.3rem; border-radius: 999px; font-size: 14.5px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(31,175,84,0.4); transition: transform 0.2s, background 0.2s; }
-  .wa-float:hover { background: var(--wa-dk); transform: translateY(-2px); }
-  .wa-float svg { width: 22px; height: 22px; fill: #fff; }
-
-  /* ── MOBILE NAV ── */
-  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 200; }
-  .hamburger span { display: block; width: 24px; height: 2.5px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
+  /* RESPONSIVE */
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 200; }
+  .hamburger span { display: block; width: 24px; height: 2.5px; background: var(--brown); border-radius: 2px; transition: all 0.3s ease; }
   .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
   .hamburger.active span:nth-child(2) { opacity: 0; }
   .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-  .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(38,34,27,0.5); z-index: 90; opacity: 0; transition: opacity 0.3s ease; }
+
+  .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(45,31,16,0.5); z-index: 90; opacity: 0; transition: opacity 0.3s ease; }
   .mobile-overlay.active { display: block; opacity: 1; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .hero-inner, .oil-inner, .about-inner, .b2b-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-photo img { height: 340px; }
-    .trust-inner { grid-template-columns: repeat(2, 1fr); }
-    .trust-item:nth-child(3) { border-left: none; }
-    .trust-item:nth-child(n+3) { border-top: 1px solid var(--line); }
-  }
   @media (max-width: 900px) {
-    nav { padding: 0.6rem 1.25rem; }
-    section, .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
-    .nav-links { position: fixed; top: 0; right: -100%; width: 290px; height: 100vh; background: var(--bg); flex-direction: column; align-items: flex-start; padding: 5rem 1.75rem 2rem; gap: 0; z-index: 150; box-shadow: -8px 0 32px rgba(0,0,0,0.15); transition: right 0.35s ease; display: flex; }
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--cream); flex-direction: column; padding: 5rem 2rem 2rem; gap: 0; z-index: 150; box-shadow: -4px 0 24px rgba(0,0,0,0.15); transition: right 0.35s ease; display: flex; }
     .nav-links.active { right: 0; }
-    .nav-links li { width: 100%; border-bottom: 1px solid var(--line); }
-    .nav-links a { display: block; padding: 1rem 0; font-size: 15px; }
+    .nav-links li { border-bottom: 1px solid rgba(92,122,46,0.12); }
+    .nav-links a { display: block; padding: 1rem 0; font-size: 15px; letter-spacing: 1px; }
     .nav-cta { display: none; }
     .hamburger { display: flex; }
-    .nav-links .mobile-cta { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; padding: 0.85rem 1.25rem; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; margin-top: 1.25rem; width: 100%; }
-    section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
-    .hero { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .oil-stage { padding: 1.75rem 1.25rem; }
-    .oil-front { max-height: 300px; }
-    .wa-float span { display: none; }
-    .wa-float { padding: 0.95rem; }
+    .nav-links .mobile-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 0.75rem 1.5rem; border-radius: 24px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; text-align: center; margin-top: 1rem; justify-content: center; }
+    section { padding: 4rem 1.25rem; }
   }
   @media (min-width: 901px) {
     .mobile-cta { display: none !important; }
   }
 
-  /* ── ANIMATION ── */
-  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
+  /* SCROLL TO TOP */
+  .scroll-top-btn { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--green); color: #fff; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+  .scroll-top-btn:hover { background: var(--green-dk); transform: translateY(-2px); }
+
+  /* ÖNE ÇIKAN ÜRÜN — ZEYTİNYAĞI */
+#one-cikan { background: var(--green-dk); color: var(--cream); padding: 5.5rem 2rem; }
+#one-cikan .oo-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; }
+#one-cikan .oo-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 440px; }
+#one-cikan .oo-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(232,201,122,0.22), rgba(232,201,122,0) 70%); }
+#one-cikan .oo-front { position: relative; max-height: 460px; width: auto; filter: drop-shadow(0 22px 40px rgba(0,0,0,0.45)); }
+#one-cikan .oo-back-wrap { position: absolute; right: 0; bottom: 1.5rem; width: 130px; text-align: center; }
+#one-cikan .oo-back { width: 130px; border-radius: 10px; border: 3px solid rgba(247,242,232,0.85); filter: drop-shadow(0 10px 22px rgba(0,0,0,0.4)); }
+#one-cikan .oo-back-cap { font-size: 11px; letter-spacing: 1px; color: rgba(247,242,232,0.6); margin-top: 6px; text-transform: uppercase; }
+#one-cikan .oo-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+#one-cikan .oo-eyebrow .lbl { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-lt); }
+#one-cikan .oo-eyebrow .rule { height: 1px; width: 40px; background: rgba(232,201,122,0.5); }
+#one-cikan .oo-eyebrow .loc { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(247,242,232,0.65); }
+#one-cikan h2.oo-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--cream); margin-bottom: 1.1rem; }
+#one-cikan .oo-desc { font-size: 1.02rem; line-height: 1.8; color: rgba(247,242,232,0.82); max-width: 480px; margin-bottom: 1.5rem; }
+#one-cikan .oo-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+#one-cikan .oo-chip { font-size: 12px; font-weight: 700; color: var(--cream-dk); background: rgba(247,242,232,0.08); border: 1px solid rgba(232,201,122,0.32); padding: 6px 14px; border-radius: 22px; }
+#one-cikan .oo-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid rgba(247,242,232,0.15); padding-top: 1.5rem; }
+#one-cikan .oo-price { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--gold-lt); line-height: 1; }
+#one-cikan .oo-price-sub { font-size: 12.5px; color: rgba(247,242,232,0.6); margin-top: 0.4rem; }
+#one-cikan .oo-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--text); padding: 0.95rem 2rem; border-radius: 30px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: all 0.2s; }
+#one-cikan .oo-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+@media (max-width: 860px) {
+  #one-cikan .oo-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  #one-cikan .oo-stage { min-height: 360px; }
+  #one-cikan .oo-front { max-height: 360px; }
+  #one-cikan .oo-back-wrap { width: 100px; }
+  #one-cikan .oo-back { width: 100px; }
+}
+
+  /* E-TİCARET EKLERİ */
+  section { scroll-margin-top: 90px; }
+  a.product-icon-wrap { text-decoration: none; }
+  .product-name a { color: inherit; text-decoration: none; }
+  .product-name a:hover { color: var(--green-dk); text-decoration: underline; text-underline-offset: 3px; }
+  .order-row { justify-content: space-between; align-items: center; gap: 8px; }
+  .btn-detail { font-size: 12px; font-weight: 700; color: var(--brown-lt); text-decoration: none; border: 1.5px solid rgba(61,43,31,0.2); padding: 0.4rem 0.9rem; border-radius: 20px; transition: all 0.2s; }
+  .btn-detail:hover { border-color: var(--green); color: var(--green); }
+  .product-order-btn { border: none; cursor: pointer; font-family: inherit; }
+  .prd-name-link { color: inherit; text-decoration: none; }
+  .prd-name-link:hover { color: var(--green-dk); text-decoration: underline; text-underline-offset: 3px; }
+  #one-cikan .oo-cta-ghost { background: transparent; color: var(--gold-lt); border: 1.5px solid rgba(232,201,122,0.5); }
+  #one-cikan .oo-cta-ghost:hover { background: rgba(232,201,122,0.12); }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar"><b>1.500 ₺ üzeri kargo ücretsiz</b> · Türkiye'nin her noktasına 1-2 iş gününde teslimat</div>
-
 <!-- NAV -->
 <nav>
-  <a class="nav-brand" href="#anasayfa">
+<a class="nav-brand" href="#anasayfa">
+  <div class="nav-logo-wrapper">
     <img src="images/HH_seffaf_logo.webp" alt="Hatay Hasadı Logo" class="nav-logo-img">
-    <div class="nav-brand-text">
-      <strong>Hatay Hasadı</strong>
-      <span>Topraktan Gelen Lezzet</span>
-    </div>
-  </a>
+  </div>
+  <div class="nav-brand-text">
+    <strong>Hatay Hasadı</strong>
+    <span>Topraktan Gelen Lezzet</span>
+  </div>
+</a>
   <ul class="nav-links">
     <li><a href="#urunler">Ürünler</a></li>
-    <li><a href="#fiyatlar">Fiyat Listesi</a></li>
     <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#fiyatlar">Fiyatlar</a></li>
     <li><a href="#toplu-siparis">Toplu Sipariş</a></li>
-    <li><a class="mobile-cta" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">Sipariş Ver</a></li>
+    <li><a class="mobile-cta" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">Sipariş Ver →</a></li>
   </ul>
-  <a class="nav-cta" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">Sipariş Ver</a>
+  <a class="nav-cta" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">Sipariş Ver →</a>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menü">
     <span></span><span></span><span></span>
   </button>
@@ -294,346 +348,186 @@
 <div class="mobile-overlay" id="mobileOverlay"></div>
 
 <!-- HERO -->
-<header class="hero" id="anasayfa">
-  <div class="hero-inner">
-    <div>
-      <span class="hero-tag">🌿 Hatay'dan Sofranıza</span>
-      <h1>Hatay'ın Doğal Baharatları,<br><span>Kapınıza Kadar</span></h1>
-      <p>Hatay'ın bereketli topraklarından direkt temin ettiğimiz baharatlar, kendi markamızla özenle paketlenerek 1-2 iş gününde kapınıza ulaşıyor.</p>
-      <div class="hero-buttons">
-        <a class="btn btn-wa" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">
-          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp ile Sipariş Ver
-        </a>
-        <a class="btn btn-outline" href="#urunler">Ürünleri İncele</a>
-      </div>
-      <div class="hero-points">
-        <div class="hero-point"><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>%100 doğal, katkısız ürünler</div>
-        <div class="hero-point"><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>Doğrudan Hatay'daki üreticiden</div>
-        <div class="hero-point"><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>Üyelik gerekmez, WhatsApp ile kolay sipariş</div>
-      </div>
+<section class="hero" id="anasayfa">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="hero-circle hero-circle-3"></div>
+   <!-- Sol Kolaj -->
+  <div class="hero-collage hero-collage-left fade-in">
+    <div class="collage-card">
+      <img src="images/tarla2.jpg" alt="Hatay tarla manzarası" loading="lazy">
     </div>
-    <div class="hero-photo">
-      <img src="images/tarla.jpg" alt="Hatay'ın bereketli tarım arazileri">
-      <div class="hero-badge">
-        <img src="images/HH_seffaf_logo.webp" alt="Hatay Hasadı">
-        <div>
-          <strong>Hatay Hasadı Güvencesi</strong>
-          <span>Her pakette aynı tazelik</span>
-        </div>
-      </div>
+    <div class="collage-card">
+      <img src="images/baharatlar.jpg" alt="Renkli baharatlar" loading="lazy">
+    </div>
+    <div class="collage-card">
+      <img src="images/tarla.jpg" alt="Doğal tarım arazisi" loading="lazy">
     </div>
   </div>
-</header>
 
-<!-- TRUST STRIP -->
-<div class="trust">
-  <div class="trust-inner">
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 7 4 10 4 14a8 8 0 0 0 16 0c0-4-3-7-8-12z"/></svg></div>
-      <div><strong>%100 Doğal</strong><span>Katkısız ve saf</span></div>
+  <!-- Sağ Kolaj -->
+  <div class="hero-collage hero-collage-right fade-in">
+    <div class="collage-card">
+      <img src="images/baharatlar_kasik.jpg" alt="Baharat manzarası" loading="lazy">
     </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg></div>
-      <div><strong>Hızlı Kargo</strong><span>1-2 iş gününde teslim</span></div>
+    <div class="collage-card">
+      <img src="images/aci_biber.jpg" alt="Kırmızı biber" loading="lazy">
     </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-      <div><strong>Kalite Güvencesi</strong><span>Her partide aynı standart</span></div>
+    <div class="collage-card">
+      <img src="images/Numunelerimiz1.jpeg" alt="Baharat pazarı" loading="lazy">
     </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 20l1-5.6A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 2.5a8.38 8.38 0 0 1 9 9z"/></svg></div>
-      <div><strong>WhatsApp Destek</strong><span>Ort. 30 dk içinde yanıt</span></div>
+  </div>
+  <div class="hero-inner fade-in">
+    <div class="hero-tag">Hatay'dan Sofranıza</div>
+    <h1>Toprağın Gerçek<br><em>Aroması</em></h1>
+    <p>Hatay'ın bereketli topraklarından direkt temin ettiğimiz baharatlar,<br>kendi markamızla özenle paketlenerek kapınıza ulaşıyor.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#urunler">Ürünleri Keşfet</a>
+      <a class="btn-secondary" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">WhatsApp ile Sipariş</a>
     </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>100%</strong><span>Doğal</span></div>
+      <div class="hero-stat"><strong>Hatay</strong><span>BAHARATLARI</span></div>
+      <div class="hero-stat"><strong>Kapıya</strong><span>Teslimat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>İsot</span><span>Sumak</span><span>Zahter</span><span>Çörek Otu</span>
+    <span>Pul Biber</span><span>Kimyon</span><span>Kuru Nane</span><span>Karabiber</span>
+    <span>İsot</span><span>Sumak</span><span>Zahter</span><span>Çörek Otu</span>
+    <span>Pul Biber</span><span>Kimyon</span><span>Kuru Nane</span><span>Karabiber</span>
   </div>
 </div>
 
 <!-- PRODUCTS -->
 <section id="urunler">
   <div class="container">
-    <div class="sec-head center">
-      <p class="sec-label">Ürünlerimiz</p>
-      <h2 class="sec-title">Baharat Kataloğu</h2>
-      <p class="sec-sub">Her ürün özenle seçilmiş, doğrudan Hatay kaynaklı. 100 gr ve 250 gr seçenekleriyle.</p>
-    </div>
-    <div class="product-grid">
-
-      <!-- İSOT -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Isot.webp" alt="İsot Biberi" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Hatay'a Özgü</span>
-          <div class="product-name">İsot Biberi</div>
-          <div class="product-desc">Hatay'ın simge baharatı. Kendine özgü duman aroması ve orta ateşiyle.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">129 ₺</span><span class="price-new">109 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">299 ₺</span><span class="price-new">245 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=İsot%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
+    <div class="products-header fade-in">
+      <div>
+        <p class="section-label">Ürün Kataloğu</p>
+        <h2 class="section-title">Seçkin Baharatlarımız</h2>
+        <p class="section-sub">Her ürün özenle seçilmiş, doğrudan Hatay kaynaklı, standart kalite güvencesiyle.</p>
+        
+        <div class="info-note">
+          <strong>📋 Önemli:</strong> Sizlere en iyi ürünleri sunabilmek adına özveriyle çalışmaya devam ediyoruz.Detaylı bilgi almak için <a href="https://wa.me/905441230776?text=Merhaba%2C%20bilgi%20almak%20istiyorum." target="_blank" style="color: var(--green); font-weight: 700; text-decoration: underline;">WhatsApp</a> üzerinden bizimle her zaman iletişime geçebilirsiniz.
         </div>
       </div>
+   </div>
+    <div class="product-grid" id="productGrid">
 
-      <!-- PUL BİBER -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/PulBiber.webp" alt="Kırmızı Pul Biber" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">En Çok Satan</span>
-          <div class="product-name">Kırmızı Pul Biber</div>
-          <div class="product-desc">Acı çeşidi. Güneydoğu'nun bereket yüklü kırmızısı, yoğun renk ve aroma.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">119 ₺</span><span class="price-new">99 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">259 ₺</span><span class="price-new">219 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Kırmızı%20Toz%20Biber%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- SUMAK -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Sumak.webp" alt="Çekilmiş Sumak" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Restoran Seçimi</span>
-          <div class="product-name">Sumak (Çekilmiş)</div>
-          <div class="product-desc">1. kalite Hatay sumağı. Ekşi, aromatik, salatada ve mezede vazgeçilmez.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">209 ₺</span><span class="price-new">175 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">499 ₺</span><span class="price-new">425 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Sumak%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- ZAHTER -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/zahter.webp" alt="Zahter" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Hatay Aroması</span>
-          <div class="product-name">Zahter</div>
-          <div class="product-desc">Kurutulmuş kekik karışımı. Kahvaltıda zeytinyağıyla, etlerde, pidelerde.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">124 ₺</span><span class="price-new">105 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">310 ₺</span><span class="price-new">251 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Zahter%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- KARABİBER -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Karabiber.webp" alt="Çekilmiş Karabiber" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Mutfağın Temeli</span>
-          <div class="product-name">Karabiber (Çekilmiş)</div>
-          <div class="product-desc">Et, tavuk, çorba ve sosların derinliğini artıran güçlü baharat notu.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">199 ₺</span><span class="price-new">169 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">499 ₺</span><span class="price-new">415 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Karabiber%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- ÇÖREK OTU -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/CorekOtu.webp" alt="Çörek Otu" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Sağlık</span>
-          <div class="product-name">Çörek Otu</div>
-          <div class="product-desc">Tam tane, saf ve katkısız. Ekmeklerde, peynirde, çaylarda kullanım.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">79 ₺</span><span class="price-new">65 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">139 ₺</span><span class="price-new">119 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Çörek%20Otu%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- KİMYON -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/KimyonNew.webp" alt="Çekilmiş Kimyon" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Temel Baharat</span>
-          <div class="product-name">Çekilmiş Kimyon</div>
-          <div class="product-desc">Her mutfakta tükenen, düzenli alım. Aromatik ve güçlü aroma profili.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">129 ₺</span><span class="price-new">109 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">289 ₺</span><span class="price-new">245 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Kimyon%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- KURU NANE -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/KuruNane.webp" alt="Kuru Nane" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Kuru Nane</div>
-          <div class="product-desc">Yemekte, çayda, ayranın içinde. Taze renk, güçlü aroma.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">79 ₺</span><span class="price-new">65 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">139 ₺</span><span class="price-new">119 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Kuru%20Nane%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- KİŞNİŞ -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Kisnis.webp" alt="Kişniş" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Kişniş</div>
-          <div class="product-desc">Limonumsu aromasıyla et yemeklerinde, çorbalarda ve turşularda.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">59 ₺</span><span class="price-new">49 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">109 ₺</span><span class="price-new">89 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Kişniş%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- REZENE -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Rezene.webp" alt="Rezene" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Rezene</div>
-          <div class="product-desc">Tatlı anason aromasıyla balık yemeklerinde ve bitki çaylarında.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">79 ₺</span><span class="price-new">65 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">139 ₺</span><span class="price-new">119 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Rezene%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- BİBERİYE -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Biberiye.webp" alt="Biberiye" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Biberiye</div>
-          <div class="product-desc">Fırın etlerinde, tavukta, patates ve zeytinyağlı yemeklerde.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">69 ₺</span><span class="price-new">59 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">119 ₺</span><span class="price-new">105 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Biberiye%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- KARANFİL -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Karanfil.webp" alt="Karanfil" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Karanfil</div>
-          <div class="product-desc">Et sularında, pilavlarda, tatlılarda ve kış çaylarında derinlik katar.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">119 ₺</span><span class="price-new">95 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">239 ₺</span><span class="price-new">199 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Karanfil%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
-
-      <!-- SARIMSAK TOZU -->
-      <div class="product-card fade-in">
-        <div class="product-img"><img src="images/Sarımsak.webp" alt="Sarımsak Tozu" loading="lazy"></div>
-        <div class="product-body">
-          <span class="product-badge">Klasik</span>
-          <div class="product-name">Sarımsak Tozu</div>
-          <div class="product-desc">Marinelerde, soslarda, köftelerde doğal sarımsak lezzeti.</div>
-          <div class="price-box">
-            <div class="price-row"><span class="price-size">100 gr</span><span class="price-val"><span class="price-old">79 ₺</span><span class="price-new">65 ₺</span></span></div>
-            <div class="price-row"><span class="price-size">250 gr</span><span class="price-val"><span class="price-old">289 ₺</span><span class="price-new">245 ₺</span></span></div>
-          </div>
-          <a class="product-btn" href="https://wa.me/905441230776?text=Sarımsak%20Tozu%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-        </div>
-      </div>
+      <!-- Baharat kartları js/products.js verisinden otomatik oluşturulur -->
 
       <!-- YAKINDA -->
-      <div class="product-card soon fade-in">
-        <div class="product-img"><img src="images/daha_fazla.webp" alt="Yakında gelecek ürünler" loading="lazy"></div>
+      <div class="product-card fade-in" id="yakindaCard" style="border: 2px dashed rgba(92,122,46,0.3); background: rgba(92,122,46,0.03);">
+         <div class="product-icon-wrap"><img src="images/daha_fazla.webp" alt="daha_fazla" /></div>
         <div class="product-body">
-          <span class="product-badge">Çok Yakında</span>
+          <span class="product-badge" style="background: rgba(196,150,58,0.15); color: var(--gold);">Çok Yakında</span>
           <div class="product-name">Daha Fazla Ürün</div>
-          <div class="product-desc">Anason, Zerdeçal Tozu, Meryem Ana Otu, Soğan Tozu ve daha fazlası geliyor.</div>
-          <a class="product-btn" href="https://wa.me/905441230776" target="_blank" style="margin-top:auto;">Haber Al</a>
+          <div class="product-desc"> Anason,Zerdeçal Tozu,Meryem Ana Otu, Soğan tozu ve daha fazlası geliyor.</div>
+          <div class="order-row" style="padding-top: 1.5rem;">
+            <a class="product-order-btn" style="background: var(--gold);" href="https://wa.me/905441230776" target="_blank">Haber Al</a>
+          </div>
         </div>
       </div>
 
+    </div>
+    <!-- NATÜREL SIZMA ZEYTİNYAĞI -->
+<!-- ÖNE ÇIKAN ÜRÜN -->
+<section id="one-cikan">
+  <div class="oo-inner">
+    <div class="oo-stage fade-in">
+      <div class="oo-glow"></div>
+      <img class="oo-front" src="images/zeytinyagi-on.webp" alt="Naturel Sızma Zeytinyağı 5L teneke">
+      <div class="oo-back-wrap">
+        <img class="oo-back" src="images/zeytinyagi-arka.webp" alt="Naturel Sızma Zeytinyağı arka etiket">
+        <div class="oo-back-cap">Arka Etiket</div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="oo-eyebrow">
+        <span class="lbl">Öne Çıkan Ürün</span>
+        <span class="rule"></span>
+        <span class="loc">Antakya · Hatay</span>
+      </div>
+      <h2 class="oo-title">Naturel Sızma<br>Zeytinyağı</h2>
+      <p class="oo-desc">Antakya'nın bereketli topraklarında, ilaçsız yetiştirilen Gemlik tipi zeytinlerden geleneksel yöntemlerle sıkıldı. Toprağın gerçek lezzetini ve Hatay'ın gastronomi mirasını sofranıza taşır.</p>
+      <div class="oo-chips">
+        <span class="oo-chip">Gemlik Tipi Zeytin</span>
+        <span class="oo-chip">Geleneksel Sıkım</span>
+        <span class="oo-chip">İlaçsız Tarım</span>
+        <span class="oo-chip">5 L Teneke</span>
+      </div>
+      <div class="oo-foot">
+        <div>
+          <div class="oo-price">2.500 ₺</div>
+          <div class="oo-price-sub">5 litre teneke · tek fiyat</div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button class="oo-cta" onclick="HHCart.add('zeytinyagi', 0, 1)" style="border:none;cursor:pointer;font-family:inherit;">🧺 Sepete Ekle</button>
+          <a class="oo-cta oo-cta-ghost" href="urun.html?id=zeytinyagi">İncele →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ZEYTİNYAĞI -->
-<section id="one-cikan">
-  <div class="oil-inner">
-    <div class="oil-stage fade-in">
-      <img class="oil-front" src="images/zeytinyagi-on.webp" alt="Naturel Sızma Zeytinyağı 5L teneke">
-      <div class="oil-back-wrap">
-        <img class="oil-back" src="images/zeytinyagi-arka.webp" alt="Naturel Sızma Zeytinyağı arka etiket">
-        <div class="oil-back-cap">Arka Etiket</div>
-      </div>
-    </div>
-    <div class="fade-in">
-      <p class="sec-label">Öne Çıkan Ürün · Antakya, Hatay</p>
-      <h2 class="sec-title">Naturel Sızma Zeytinyağı</h2>
-      <p class="sec-sub">Antakya'nın bereketli topraklarında, ilaçsız yetiştirilen Gemlik tipi zeytinlerden geleneksel yöntemlerle sıkıldı. Toprağın gerçek lezzetini ve Hatay'ın gastronomi mirasını sofranıza taşır.</p>
-      <div class="oil-chips">
-        <span class="oil-chip">Gemlik Tipi Zeytin</span>
-        <span class="oil-chip">Geleneksel Sıkım</span>
-        <span class="oil-chip">İlaçsız Tarım</span>
-        <span class="oil-chip">5 L Teneke</span>
-      </div>
-      <div class="oil-buy">
-        <div class="oil-price">2.500 ₺<small>5 litre teneke · tek fiyat</small></div>
-        <a class="btn btn-green" href="https://wa.me/905441230776?text=Naturel%20Sızma%20Zeytinyağı%20(5L)%20sipariş%20etmek%20istiyorum." target="_blank">Sipariş Ver</a>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="hakkimizda">
-  <div class="about-inner">
-    <img class="about-photo fade-in" src="images/tarla2.jpg" alt="Hatay'ın tarım arazileri" loading="lazy">
-    <div class="about-text fade-in">
-      <p class="sec-label">Hakkımızda</p>
-      <h2 class="sec-title">Hatay'ın Güneşi, Sofranızın Lezzeti</h2>
-      <p>Hikayemiz, çocukluğumuzun geçtiği Hatay topraklarında, güneşin altında kuruyan biberlerin kokusuyla başladı. Güvendiğimiz yerel üreticilerle el ele vererek, toprağın doğallığını bozmadan en saf baharatları seçiyoruz. Tek gayemiz: o özlediğiniz gerçek lezzeti, en taze haliyle sofralarınıza ulaştırmak.</p>
-      <ul class="about-list">
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span><div><strong>Güvenilir Tedarik</strong><span>Nesilden nesile aktarılan tecrübeyle doğrudan üreticiden</span></div></li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span><div><strong>Özenli Paketleme</strong><span>Aromayı koruyan kraft doypack ambalaj</span></div></li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span><div><strong>Tutarlı Kalite</strong><span>Her pakette aynı özen, aynı tazelik</span></div></li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span><div><strong>Hızlı Teslimat</strong><span>WhatsApp ile sipariş, 1-2 iş gününde kargo</span></div></li>
-      </ul>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-in">
+        <div class="about-icon-row">
+          <div class="about-icon-card"><span class="icon">🌾</span><strong>Direkt Kaynak</strong><span>Hatay üretici bağlantısı</span></div>
+          <div class="about-icon-card"><span class="icon">📦</span><strong>Özenli Paket</strong><span>Kraft doypack ambalaj</span></div>
+        </div>
+        <div class="about-icon-row">
+          <div class="about-icon-card"><span class="icon">🚚</span><strong>Kapıya Teslimat</strong><span>Türkiye'nin her noktasına kargo</span></div>
+          <div class="about-icon-card"><span class="icon">✅</span><strong>Sürdürülebilir Lezzet</strong><span>Her Pakette Aynı Tazelik</span></div>
+        </div>
+        <div class="about-quote">"Hatay'dan getirdiğimiz her baharat, o toprağın güneşini ve bereketini taşıyor."</div>
+      </div>
+      <div class="fade-in">
+        <p class="section-label">Hikayemiz</p>
+        <h2 class="section-title">Hatay'ın Güneşi,<br>Sofranızın Lezzeti</h2>
+        <p style="color: var(--text-lt); font-size: 1rem; line-height: 1.8; margin: 1rem 0 1.75rem;">
+          Bizim hikayemiz, çocukluğumuzun geçtiği o uçsuz buçaksız Hatay topraklarında, güneşin altında kuruyan biberlerin kokusuyla başladı. Hatay'ın o kendine has bereketini ve annelerimizin mutfağındaki o gerçek rayihayı tüm doğallığıyla, özenle sofralarınıza taşımak istedik.Güvendiğimiz yerel üreticilerle el ele vererek; toprağın doğallığını bozmadan, içine hiçbir yabancı el değdirmeden en saf baharatları seçtik. Hatay Hasadı olarak tek bir gayemiz var: O özlediğiniz gerçek lezzeti, en taze haliyle sofralarınıza konuk etmek.
+        </p>
+        <div class="about-content">
+          <div class="about-feature"><div class="about-feature-icon">🤝</div><div class="about-feature-text"><strong>Güvenilir Tedarik Zinciri</strong><span>Nesilden nesile aktarılan tecrübelerle doğrudan çalışma ilişkisi</span></div></div>
+          <div class="about-feature"><div class="about-feature-icon">📋</div><div class="about-feature-text"><strong>Sürdürülebilir Lezzet</strong><span>Her pakette aynı özen ve kalite</span></div></div>
+          <div class="about-feature"><div class="about-feature-icon">💬</div><div class="about-feature-text"><strong>Kolay Sipariş & Hızlı Teslimat</strong><span>WhatsApp ile sipariş, 1-2 iş günü içerisinde kargo</span></div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STEPS -->
+<!-- HOW TO ORDER -->
 <section id="nasil-siparis">
   <div class="container">
-    <div class="sec-head center">
-      <p class="sec-label">Nasıl Sipariş Verilir?</p>
-      <h2 class="sec-title">4 Adımda Kapınızda</h2>
-      <p class="sec-sub">Üyelik gerekmez. WhatsApp üzerinden mesaj atmanız yeterli.</p>
-    </div>
+    <p class="section-label">Nasıl Sipariş Verilir?</p>
+    <h2 class="section-title">4 Adımda Kapınızda</h2>
+    <p class="section-sub">Üyeliğe ihtiyaç duymadan WhatsApp üzerinden bizimle iletişime geçebilir, siparişlerinizi kolayca iletebilirsiniz.</p>
     <div class="steps-grid">
-      <div class="step-card fade-in"><span class="step-num">1</span><h3>WhatsApp'ı Açın</h3><p>Sayfadaki butona tıklayın, sohbet hemen başlasın.</p></div>
-      <div class="step-card fade-in"><span class="step-num">2</span><h3>Ürün Seçin</h3><p>Hangi baharatı, kaç gram istediğinizi bize iletin.</p></div>
-      <div class="step-card fade-in"><span class="step-num">3</span><h3>Ödeme Yapın</h3><p>IBAN ile ödeme. Peşin, güvenli, basit.</p></div>
-      <div class="step-card fade-in"><span class="step-num">4</span><h3>Kapınızda</h3><p>1-2 iş günü içinde kargo takip numarasıyla elinizde.</p></div>
+      <div class="step-card fade-in"><span class="step-num">01</span><span class="step-icon">📱</span><h3>WhatsApp'ı Açın</h3><p>Sayfadaki butona tıklayın, sohbetimiz hemen başlasın.</p></div>
+      <div class="step-card fade-in"><span class="step-num">02</span><span class="step-icon">🛒</span><h3>Ürün Seçin</h3><p>Hangi baharatı, kaç gram istediğinizi bize iletin.</p></div>
+      <div class="step-card fade-in"><span class="step-num">03</span><span class="step-icon">💳</span><h3>Ödeme Yapın</h3><p>IBAN ile ödeme. Peşin, güvenli, basit.</p></div>
+      <div class="step-card fade-in"><span class="step-num">04</span><span class="step-icon">🚀</span><h3>Kapınızda</h3><p>1-2 iş günü içinde kargo takip numarasıyla elinizde.</p></div>
     </div>
-    <div class="steps-cta fade-in">
-      <a class="btn btn-wa" href="https://wa.me/905441230776?text=Merhaba%2C%20Hatay%20Hasadı'ndan%20sipariş%20vermek%20istiyorum." target="_blank">
-        <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div class="whatsapp-cta fade-in">
+      <a class="whatsapp-btn" href="https://wa.me/905441230776?text=Merhaba%2C%20Hatay%20Hasadı'ndan%20sipariş%20vermek%20istiyorum." target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp ile Hemen Sipariş Ver
       </a>
-      <p class="steps-note">Ortalama yanıt süresi: 30 dakika · Pazartesi–Cumartesi 09:00–21:00</p>
+      <p class="whatsapp-note">Ortalama yanıt süresi: 30 dakika · Pazartesi–Cumartesi 09:00–21:00</p>
     </div>
   </div>
 </section>
@@ -641,101 +535,37 @@
 <!-- FİYATLAR -->
 <section id="fiyatlar">
   <div class="container">
-    <div class="sec-head center">
-      <p class="sec-label">Fiyat Listesi</p>
-      <h2 class="sec-title">Tüm Fiyatlar Bir Arada</h2>
-      <p class="sec-sub">100 gr ve 250 gr boyutları için net fiyatlar.</p>
-    </div>
+    <p class="section-label">Fiyat Listesi</p>
+    <h2 class="section-title">Tüm Fiyatlar Bir Arada</h2>
+    <p class="section-sub">100 gr ve 250 gr boyutlarımız için net fiyatlar. Kampanya fiyatı geçerlilik süresi sınırlıdır.</p>
 
-    <div class="promo fade-in">
+    <div class="promo-banner fade-in">
       <div>
-        <strong>Açılış Kampanyası</strong><br>
-        <span>Tüm ürünlerde %15–18 indirim · İlk siparişinizde ek %5 WhatsApp indirimi</span>
+        <strong>🌿 Açılış Kampanyası</strong><br>
+        <span>Tüm ürünlerde %15–18 indirim — ilk siparişinizde ek %5 WhatsApp indirimi</span>
       </div>
-      <span class="promo-tag">Sınırlı Süre</span>
+      <span class="promo-badge">Sınırlı Süre</span>
     </div>
 
-    <div class="tbl-wrap">
+    <div style="overflow-x: auto;">
     <table class="pricing-tbl">
       <thead>
         <tr>
           <th>Ürün</th>
-          <th>100 Gram</th>
+          <th>100 Gram ⭐</th>
           <th>250 Gram</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td><span class="prd-name">İsot Biberi</span><span class="prd-badge">Hatay'a Özgü</span></td>
-          <td class="pc"><span class="o">129 ₺</span><span class="n">109 ₺</span></td>
-          <td class="pc"><span class="o">299 ₺</span><span class="n">245 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Çekilmiş Sumak</span><span class="prd-badge">1. Kalite</span></td>
-          <td class="pc"><span class="o">209 ₺</span><span class="n">175 ₺</span></td>
-          <td class="pc"><span class="o">499 ₺</span><span class="n">425 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Zahter</span><span class="prd-badge">Hatay Aroması</span></td>
-          <td class="pc"><span class="o">124 ₺</span><span class="n">105 ₺</span></td>
-          <td class="pc"><span class="o">310 ₺</span><span class="n">251 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Kırmızı Pul Biber</span></td>
-          <td class="pc"><span class="o">119 ₺</span><span class="n">99 ₺</span></td>
-          <td class="pc"><span class="o">259 ₺</span><span class="n">219 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Karabiber (Çekilmiş)</span></td>
-          <td class="pc"><span class="o">199 ₺</span><span class="n">169 ₺</span></td>
-          <td class="pc"><span class="o">499 ₺</span><span class="n">415 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Çörek Otu</span></td>
-          <td class="pc"><span class="o">79 ₺</span><span class="n">65 ₺</span></td>
-          <td class="pc"><span class="o">139 ₺</span><span class="n">119 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Kimyon</span></td>
-          <td class="pc"><span class="o">129 ₺</span><span class="n">109 ₺</span></td>
-          <td class="pc"><span class="o">289 ₺</span><span class="n">245 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Kuru Nane</span></td>
-          <td class="pc"><span class="o">79 ₺</span><span class="n">65 ₺</span></td>
-          <td class="pc"><span class="o">139 ₺</span><span class="n">119 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Kişniş</span></td>
-          <td class="pc"><span class="o">59 ₺</span><span class="n">49 ₺</span></td>
-          <td class="pc"><span class="o">109 ₺</span><span class="n">89 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Rezene</span></td>
-          <td class="pc"><span class="o">79 ₺</span><span class="n">65 ₺</span></td>
-          <td class="pc"><span class="o">139 ₺</span><span class="n">119 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Biberiye</span></td>
-          <td class="pc"><span class="o">69 ₺</span><span class="n">59 ₺</span></td>
-          <td class="pc"><span class="o">119 ₺</span><span class="n">105 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Karanfil</span></td>
-          <td class="pc"><span class="o">119 ₺</span><span class="n">95 ₺</span></td>
-          <td class="pc"><span class="o">239 ₺</span><span class="n">199 ₺</span></td>
-        </tr>
-        <tr>
-          <td><span class="prd-name">Sarımsak Tozu</span></td>
-          <td class="pc"><span class="o">79 ₺</span><span class="n">65 ₺</span></td>
-          <td class="pc"><span class="o">289 ₺</span><span class="n">245 ₺</span></td>
-        </tr>
+      <tbody id="pricingBody">
+        <!-- Satırlar js/products.js verisinden otomatik oluşturulur -->
       </tbody>
     </table>
     </div>
-    <p class="tbl-note">1.500 ₺ ve üzeri siparişlerde kargo ücretsizdir · Toplu siparişler için ayrı fiyat listesi mevcuttur</p>
-    <div class="tbl-cta">
-      <a class="btn btn-green" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank">WhatsApp ile Sipariş Ver</a>
+    <p class="tbl-note">⭐ 100 Gram en çok tercih edilen boyuttur &nbsp;·&nbsp; 1500 ₺ ve üzeri siparişlerinizde kargo ücretsizdir. &nbsp;·&nbsp; Toplu siparişler için ayrı fiyat listesi mevcuttur</p>
+    <div style="text-align:center; margin-top: 2rem;">
+      <a class="btn-primary" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank" style="display:inline-flex;">
+        WhatsApp ile Sipariş Ver →
+      </a>
     </div>
   </div>
 </section>
@@ -743,25 +573,23 @@
 <!-- YORUMLAR -->
 <section id="yorumlar">
   <div class="container">
-    <div class="sec-head center">
-      <p class="sec-label">Müşteri Yorumları</p>
-      <h2 class="sec-title">Müşterilerimiz Ne Diyor?</h2>
-    </div>
+    <p class="section-label">Müşteri Yorumları</p>
+    <h2 class="section-title">Onlar Ne Dedi?</h2>
     <div class="testimonial-grid">
       <div class="testimonial-card fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-text">"İsot'u başka yerde bu kadar taze ve aromatik bulamıyordum. Hatay Hasadı'nı bulduktan sonra aramayı bıraktım."</div>
-        <div class="testimonial-author"><div class="avatar">AK</div><div><div class="t-name">Ayşe K.</div><div class="t-role">Ev Hanımı, Kadıköy</div></div></div>
+        <div class="testimonial-author"><div class="testimonial-avatar">AK</div><div><div class="testimonial-name">Ayşe K.</div><div class="testimonial-role">Ev Hanımı, Kadıköy</div></div></div>
       </div>
       <div class="testimonial-card fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-text">"Sumağın kalitesi gerçekten fark yaratıyor. Müşterilerim mezze tabağından sorduğunda artık ne diyeceğimi biliyorum."</div>
-        <div class="testimonial-author"><div class="avatar">MÇ</div><div><div class="t-name">Mehmet Ç.</div><div class="t-role">Restoran İşletmecisi, Beşiktaş</div></div></div>
+        <div class="testimonial-author"><div class="testimonial-avatar">MÇ</div><div><div class="testimonial-name">Mehmet Ç.</div><div class="testimonial-role">Restoran İşletmecisi, Beşiktaş</div></div></div>
       </div>
       <div class="testimonial-card fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="testimonial-stars">★★★★★</div>
         <div class="testimonial-text">"WhatsApp ile sipariş vermek çok pratik. Bir mesajla halloluyor, ertesi gün kapımda."</div>
-        <div class="testimonial-author"><div class="avatar">SY</div><div><div class="t-name">Selin Y.</div><div class="t-role">Ev Hanımı, Üsküdar</div></div></div>
+        <div class="testimonial-author"><div class="testimonial-avatar">SY</div><div><div class="testimonial-name">Selin Y.</div><div class="testimonial-role">Ev Hanımı, Üsküdar</div></div></div>
       </div>
     </div>
   </div>
@@ -769,25 +597,29 @@
 
 <!-- B2B -->
 <section id="toplu-siparis">
-  <div class="b2b-inner">
-    <div class="fade-in">
-      <p class="sec-label">Restoran &amp; İşletmeler</p>
-      <h2 class="sec-title">Toplu Sipariş</h2>
-      <p class="sec-sub">Restoran ve işletmelere yönelik ayrı fiyat ve tedarik koşullarıyla çalışıyoruz.</p>
-      <ul class="b2b-list">
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>500 gr, 1 kg ve üzeri paketleme seçenekleri</li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>B2B özel fiyatlandırma (fiyat listesi talep edin)</li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>Düzenli haftalık / iki haftada bir teslimat</li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>Her partide tutarlı kalite garantisi</li>
-        <li><span class="check"><svg viewBox="0 0 16 16"><path d="M2 8.5 6 12l8-8"/></svg></span>Numune paketi ile önce deneyin, sonra karar verin</li>
-      </ul>
-      <a class="btn btn-green" href="https://wa.me/905441230776?text=Merhaba%2C%20toplu%20sipariş%20hakkında%20bilgi%20almak%20istiyorum." target="_blank">Toplu Sipariş İçin İletişime Geç</a>
-    </div>
-    <div class="b2b-card fade-in">
-      <h3>Numune Talep Edin</h3>
-      <p>Kullanmadan karar vermenizi beklemiyoruz. 7 farklı ürünümüzün numune paketini gönderiyor, mutfağınızda denemenizi sağlıyoruz.</p>
-      <p class="small">Numune talebi için lütfen işletme adınızı ve iletişim bilginizi paylaşın.</p>
-      <a class="btn btn-wa" href="https://wa.me/905441230776?text=Merhaba%2C%20restoran%20için%20numune%20talep%20etmek%20istiyorum." target="_blank" style="margin-top:1.25rem;">Numune Talep Et</a>
+  <div class="container">
+    <div class="b2b-inner">
+      <div class="fade-in">
+        <p class="section-label">Restoran & İşletmeler</p>
+        <h2 class="section-title">Toplu Sipariş<br>Farklı Çalışır</h2>
+        <p style="color: var(--text-lt); font-size: 1rem; line-height: 1.8; margin: 1rem 0;">
+          Restoran ve işletmelere yönelik ayrı fiyat ve tedarik koşullarıyla çalışıyoruz.
+        </p>
+        <ul class="b2b-list">
+          <li>500 gr, 1 kg ve üzeri paketleme seçenekleri</li>
+          <li>B2B özel fiyatlandırma (fiyat listesi talep edin)</li>
+          <li>Düzenli haftalık / iki haftada bir teslimat</li>
+          <li>Her partide tutarlı kalite garantisi</li>
+          <li>Numune paketi ile önce deneyin, sonra karar verin</li>
+        </ul>
+        <a class="btn-primary" href="https://wa.me/905441230776?text=Merhaba%2C%20toplu%20sipariş%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" style="display:inline-flex;margin-top:0.5rem;">Toplu Sipariş İçin İletişime Geç</a>
+      </div>
+      <div class="b2b-card fade-in">
+        <h3>Numune Talep Edin</h3>
+        <p>Restoranınızda veya kafenizde kullanmadan karar vermenizi beklemiyoruz. 7 farklı ürünümüzün numune paketini gönderiyor, mutfağınızda denettiriyoruz.</p>
+        <p style="font-size:12px;color:rgba(247,242,232,0.5);margin-bottom:1.5rem;">Numune talebi için lütfen işletme adınızı ve iletişim bilginizi paylaşın.</p>
+        <a class="b2b-card-cta" href="https://wa.me/905441230776?text=Merhaba%2C%20restoran%20için%20numune%20talep%20etmek%20istiyorum." target="_blank">Numune Talep Et →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -795,27 +627,78 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">
-      <h3>Hatay Hasadı</h3>
-      <p>Topraktan gelen lezzeti, Hatay'dan sofralarınıza taşıyoruz. Katkısız, standart kalite, güvenilir tedarik.</p>
-    </div>
+    <div class="footer-brand"><h3>Hatay Hasadı</h3><p>Topraktan gelen lezzeti, Hatay'dan sofralarınıza taşıyoruz. Katkısız, standart kalite, güvenilir tedarik.</p></div>
     <div class="footer-col"><h4>Ürünler</h4><a href="#urunler">İsot Biberi</a><a href="#urunler">Sumak</a><a href="#urunler">Zahter</a><a href="#urunler">Tüm Ürünler</a></div>
-    <div class="footer-col"><h4>Bilgi</h4><a href="#hakkimizda">Hakkımızda</a><a href="#nasil-siparis">Nasıl Sipariş?</a><a href="#toplu-siparis">Toplu Sipariş</a><a href="#fiyatlar">Fiyat Listesi</a></div>
+    <div class="footer-col"><h4>Bilgi</h4><a href="#hakkimizda">Hakkımızda</a><a href="#nasil-siparis">Nasıl Sipariş?</a><a href="#toplu-siparis">Toplu Sipariş</a></div>
     <div class="footer-col"><h4>İletişim</h4><a href="https://wa.me/905441230776" target="_blank">WhatsApp</a><a href="https://instagram.com/hatayhasadi" target="_blank">Instagram</a><a href="/cdn-cgi/l/email-protection#fb92959d94bb939a8f9a82939a889a9f92d5989496">E-posta</a></div>
   </div>
   <div class="footer-bottom">
     <span>© 2025 Hatay Hasadı. Tüm hakları saklıdır.</span>
-    <span>Dürüst, Özenli, Adil Anlayış · Hatay Sevgisiyle</span>
+    <span>Dürüst, Özenli, Adil Anlayış 🌿 Hatay Sevgisiyle</span>
   </div>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a class="wa-float" href="https://wa.me/905441230776?text=Merhaba%2C%20sipariş%20vermek%20istiyorum." target="_blank" aria-label="WhatsApp ile sipariş ver">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <span>Sipariş Ver</span>
-</a>
+<!-- SCROLL TO TOP -->
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Yukarı çık">↑</button>
 
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+// Ürün kartları ve fiyat tablosu merkezi veriden oluşturulur (js/products.js)
+(function () {
+  const spices = PRODUCTS.filter(p => !p.featured);
+
+  /* Ürün kartları */
+  const cardsHtml = spices.map(p => {
+    const rows = p.sizes.map(s => `
+            <div class="size-row">
+              <span class="size-label">${s.label}</span>
+              <div class="size-prices">${s.old ? `<span class="old-price">${formatTL(s.old)}</span>` : ''}<span class="new-price">${formatTL(s.price)}</span>${s.old ? `<span class="disc-tag">%${discountPct(s.old, s.price)}</span>` : ''}</div>
+            </div>`).join('');
+    return `
+      <div class="product-card fade-in">
+        <a class="product-icon-wrap" href="urun.html?id=${p.id}"><img src="${p.images[0]}" alt="${p.name}" loading="lazy"></a>
+        <div class="product-body">
+          <span class="product-badge">${p.badge}</span>
+          <div class="product-name"><a href="urun.html?id=${p.id}">${p.name}</a></div>
+          <div class="product-desc">${p.short}</div>
+          <div class="product-sizes">${rows}
+          </div>
+          <div class="order-row">
+            <a class="btn-detail" href="urun.html?id=${p.id}">İncele</a>
+            <button class="product-order-btn" onclick="HHCart.add('${p.id}', 0, 1)">Sepete Ekle</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+  const yakinda = document.getElementById('yakindaCard');
+  if (yakinda) yakinda.insertAdjacentHTML('beforebegin', cardsHtml);
+  else document.getElementById('productGrid').innerHTML = cardsHtml;
+
+  /* Fiyat tablosu */
+  const badgeIds = ['isot', 'sumak', 'zahter'];
+  document.getElementById('pricingBody').innerHTML = spices.map(p => {
+    const cells = p.sizes.map(s =>
+      `<td class="pc">${s.old ? `<span class="o">${formatTL(s.old)}</span>` : ''}<span class="n">${formatTL(s.price)}</span>${s.old ? `<span class="d">%${discountPct(s.old, s.price)}</span>` : ''}</td>`).join('');
+    const badge = badgeIds.includes(p.id) ? `<span class="prd-badge">${p.badge}</span>` : '';
+    return `<tr><td><a class="prd-name-link" href="urun.html?id=${p.id}"><span class="prd-name">${p.name}</span></a>${badge}</td>${cells}</tr>`;
+  }).join('');
+})();
+</script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll to top button
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    scrollTopBtn.classList.add('show');
+  } else {
+    scrollTopBtn.classList.remove('show');
+  }
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // Hamburger menu
 const hamburgerBtn = document.getElementById('hamburgerBtn');
 const navLinks = document.querySelector('.nav-links');
@@ -831,24 +714,21 @@ function toggleMenu() {
 hamburgerBtn.addEventListener('click', toggleMenu);
 mobileOverlay.addEventListener('click', toggleMenu);
 
+// Close menu when a link is clicked
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     if (navLinks.classList.contains('active')) toggleMenu();
   });
 });
 
-// Fade-in on scroll
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
+  entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
     }
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// Smooth anchor scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
