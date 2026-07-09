@@ -47,17 +47,33 @@ const HHCart = (() => {
     }, 0);
   }
 
-  /* ---------- WhatsApp checkout ---------- */
-  function checkout() {
+  /* ---------- Checkout ----------
+     Üye girişi varsa sipariş önce veritabanına kaydedilir ve
+     WhatsApp mesajına sipariş numarası eklenir. Girişsiz veya
+     kayıt başarısız olsa bile WhatsApp siparişi her zaman çalışır.
+     Online ödeme eklendiğinde yalnızca bu fonksiyon güncellenecek. */
+  async function checkout() {
     const items = load();
     if (!items.length) return;
+
+    let orderLine = '';
+    try {
+      if (window.HHAuth && HHAuth.isReady()) {
+        const orderNo = await HHAuth.saveOrder(items, total());
+        if (orderNo) orderLine = `\nSipariş No: #${orderNo}`;
+      }
+    } catch (e) {
+      console.warn('Sipariş veritabanına kaydedilemedi, WhatsApp ile devam ediliyor:', e.message);
+    }
+
     const lines = items.map(i => {
       const p = getProduct(i.id);
       const s = p.sizes[i.size];
       return `• ${p.name} (${s.label}) x ${i.qty} — ${formatTL(s.price * i.qty)}`;
     });
-    const msg = `Merhaba, sipariş vermek istiyorum:\n\n${lines.join('\n')}\n\nToplam: ${formatTL(total())}`;
+    const msg = `Merhaba, sipariş vermek istiyorum:\n\n${lines.join('\n')}\n\nToplam: ${formatTL(total())}${orderLine}`;
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    if (orderLine) clear();
   }
 
   /* ---------- Arayüz ---------- */
