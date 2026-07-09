@@ -58,7 +58,7 @@ const HHCart = (() => {
 
     let orderLine = '';
     try {
-      if (window.HHAuth && HHAuth.isReady()) {
+      if (typeof HHAuth !== 'undefined' && HHAuth.isReady()) {
         const orderNo = await HHAuth.saveOrder(items, total());
         if (orderNo) orderLine = `\nSipariş No: #${orderNo}`;
       }

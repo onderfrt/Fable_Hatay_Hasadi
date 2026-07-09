@@ -7,32 +7,9 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="Hatayhasadi-SeffafLogo2_1.PNG">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --cream:    #F7F2E8;
-    --cream-dk: #EDE5D0;
-    --green:    #5C7A2E;
-    --green-dk: #3E5420;
-    --brown:    #3D2B1F;
-    --brown-lt: #7A5C3E;
-    --gold:     #C4963A;
-    --gold-lt:  #E8C97A;
-    --text:     #2D1F10;
-    --text-lt:  #6B4E35;
-    --white:    #FFFFFF;
-  }
-  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; }
-
-  nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; background: rgba(247,242,232,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(92,122,46,0.15); }
-  .nav-brand { display: flex; align-items: center; gap: 0.1rem; text-decoration: none; }
-  .nav-logo-img { height: 70px; width: auto; display: block; }
-  .nav-brand-text strong { display: block; font-family: 'Playfair Display', serif; font-size: 26px; color: var(--brown); letter-spacing: 0.5px; line-height: 1.1; }
-  .nav-brand-text span { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--green); font-weight: 700; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-lt); transition: color 0.2s; }
-  .nav-links a:hover { color: var(--green); }
-  @media (max-width: 780px) { .nav-links { display: none; } }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
 
   main { flex: 1; max-width: 880px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
   .page-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--brown); margin-bottom: 1.5rem; }
@@ -88,26 +65,9 @@
   .hidden { display: none !important; }
   .loading { text-align: center; color: var(--text-lt); padding: 3rem 1rem; }
 
-  footer { background: var(--brown); color: rgba(247,242,232,0.7); padding: 2rem; text-align: center; font-size: 13px; }
-  footer a { color: var(--gold-lt); text-decoration: none; font-weight: 700; }
 </style>
 </head>
 <body>
-
-<nav>
-  <a class="nav-brand" href="index.html">
-    <img src="images/HH_seffaf_logo.webp" alt="Hatay Hasadı Logo" class="nav-logo-img">
-    <div class="nav-brand-text">
-      <strong>Hatay Hasadı</strong>
-      <span>Topraktan Gelen Lezzet</span>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html#urunler">Ürünler</a></li>
-    <li><a href="index.html#fiyatlar">Fiyatlar</a></li>
-    <li><a href="index.html#toplu-siparis">Toplu Sipariş</a></li>
-  </ul>
-</nav>
 
 <main>
   <!-- Yükleniyor -->
@@ -175,12 +135,9 @@
   </div>
 </main>
 
-<footer>
-  © 2025 Hatay Hasadı · <a href="index.html">Ana Sayfa</a> · <a href="https://wa.me/905441230776" target="_blank">WhatsApp</a>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/vendor/supabase.js"></script>
 <script src="js/products.js"></script>
+<script src="js/layout.js"></script>
 <script src="js/supabase-config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/cart.js"></script>
@@ -216,7 +173,7 @@
   /* Ana akış */
   async function render() {
     if (!HHAuth.isConfigured()) { show('viewSetup'); return; }
-    const user = await HHAuth.getUser();
+    const user = await HHAuth.getUser().catch(() => null);
     if (!user) { show('viewAuth'); return; }
     show('viewAccount');
     loadProfile();
