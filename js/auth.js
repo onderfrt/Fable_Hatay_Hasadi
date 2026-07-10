@@ -161,7 +161,12 @@ const HHAuth = (() => {
   /* ---------- Başlatma ---------- */
   async function init() {
     if (!isConfigured()) return;
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // URL'yi normalize et: yanlışlıkla eklenen /rest/v1 gibi yolları
+    // ve sondaki eğik çizgileri temizle (istemci yolları kendisi ekler)
+    const baseUrl = SUPABASE_URL
+      .replace(/\/(rest|auth|storage|realtime|functions)\/v\d+\/?$/i, '')
+      .replace(/\/+$/, '');
+    client = window.supabase.createClient(baseUrl, SUPABASE_ANON_KEY);
     injectNavLink();
     const { data: { session } } = await client.auth.getSession();
     updateNavLink(session);
