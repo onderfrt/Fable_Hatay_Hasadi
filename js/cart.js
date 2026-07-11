@@ -11,6 +11,7 @@
 const HHCart = (() => {
   const KEY = 'hh_cart_v1';
   const WA_NUMBER = '905441230776';
+  const FREE_SHIP = 1500; // ₺ — ücretsiz kargo eşiği
 
   /* ---------- Veri ---------- */
   function load() {
@@ -28,7 +29,7 @@ const HHCart = (() => {
     if (found) found.qty += qty;
     else items.push({ id: productId, size: sizeIndex, qty });
     save(items);
-    toast('Sepete eklendi ✓');
+    toast('Sepete eklendi ✓', { label: 'Sepete Git →', onClick: open });
   }
   function setQty(productId, sizeIndex, qty) {
     let items = load();
@@ -106,7 +107,15 @@ const HHCart = (() => {
     .hh-cart-note { font-size: 11.5px; color: #6B4E35; text-align: center; margin-top: 0.7rem; line-height: 1.5; }
     .hh-cart-clear { display: block; margin: 0.6rem auto 0; background: none; border: none; font-size: 12px; color: #a05c4a; cursor: pointer; text-decoration: underline; font-family: inherit; }
     .hh-toast { position: fixed; bottom: 5.5rem; left: 50%; transform: translate(-50%, 20px); background: #3E5420; color: #fff; padding: 0.7rem 1.5rem; border-radius: 30px; font-size: 14px; font-weight: 700; z-index: 400; opacity: 0; transition: all 0.3s ease; pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
-    .hh-toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .hh-toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+    .hh-toast-act { margin-left: 12px; background: #E8C97A; color: #2D1F10; border: none; border-radius: 16px; padding: 4px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .hh-toast-act:hover { background: #f0d692; }
+    .hh-ship { margin-bottom: 1rem; display: none; }
+    .hh-ship-txt { font-size: 12.5px; color: #3D2B1F; margin-bottom: 6px; }
+    .hh-ship-txt strong { color: #3E5420; }
+    .hh-ship-bar { height: 8px; border-radius: 6px; background: rgba(61,43,31,0.12); overflow: hidden; }
+    .hh-ship-bar span { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, #C4963A, #5C7A2E); transition: width 0.4s ease; }
+    .hh-ship-bar span.done { background: #5C7A2E; }
     .nav-cart-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; padding: 6px; color: #3D2B1F; }
     .nav-cart-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .nav-cart-btn:hover { color: #5C7A2E; }
@@ -136,6 +145,10 @@ const HHCart = (() => {
       </div>
       <div class="hh-cart-items" id="hhCartItems"></div>
       <div class="hh-cart-foot">
+        <div class="hh-ship" id="hhShip">
+          <div class="hh-ship-txt" id="hhShipTxt"></div>
+          <div class="hh-ship-bar"><span id="hhShipFill"></span></div>
+        </div>
         <div class="hh-cart-total"><span>Toplam</span><strong id="hhCartTotal">0 ₺</strong></div>
         <button class="hh-cart-wa" id="hhCartCheckout">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -185,13 +198,21 @@ const HHCart = (() => {
   }
 
   let toastTimer;
-  function toast(text) {
+  function toast(text, action) {
     const el = document.getElementById('hhToast');
     if (!el) return;
-    el.textContent = text;
+    el.innerHTML = '';
+    el.appendChild(document.createTextNode(text));
+    if (action) {
+      const btn = document.createElement('button');
+      btn.className = 'hh-toast-act';
+      btn.textContent = action.label;
+      btn.addEventListener('click', () => { el.classList.remove('show'); action.onClick(); });
+      el.appendChild(btn);
+    }
     el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+    toastTimer = setTimeout(() => el.classList.remove('show'), action ? 3200 : 1800);
   }
 
   function renderBadge() {
@@ -239,6 +260,24 @@ const HHCart = (() => {
     }
     const totalEl = document.getElementById('hhCartTotal');
     if (totalEl) totalEl.textContent = formatTL(total());
+
+    // Ücretsiz kargo ilerleme çubuğu
+    const shipEl = document.getElementById('hhShip');
+    if (shipEl) {
+      const t = total();
+      shipEl.style.display = t > 0 ? 'block' : 'none';
+      const fill = document.getElementById('hhShipFill');
+      const txt = document.getElementById('hhShipTxt');
+      const pct = Math.min(100, Math.round(t / FREE_SHIP * 100));
+      fill.style.width = pct + '%';
+      if (t >= FREE_SHIP) {
+        txt.innerHTML = '🎉 Tebrikler, <strong>kargonuz ücretsiz!</strong>';
+        fill.classList.add('done');
+      } else {
+        txt.innerHTML = 'Ücretsiz kargoya <strong>' + formatTL(FREE_SHIP - t) + '</strong> kaldı';
+        fill.classList.remove('done');
+      }
+    }
   }
 
   document.addEventListener('DOMContentLoaded', injectUI);

@@ -226,6 +226,43 @@
 
   /* Başlık & meta */
   document.title = product.name + ' – Hatay Hasadı';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute('content', product.name + ': ' + product.short + ' Doğrudan Hatay kaynaklı, katkısız. 1-2 iş gününde kargoda.');
+
+  /* JSON-LD Product şeması: Google'da fiyatlı/yıldızlı zengin sonuç için */
+  const ldScript = document.createElement('script');
+  ldScript.type = 'application/ld+json';
+  document.head.appendChild(ldScript);
+  function updateJsonLd(reviews) {
+    const origin = location.origin === 'null' || location.protocol === 'file:' ? 'https://hatayhasadi.com' : location.origin;
+    const prices = product.sizes.map(s => s.price);
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: product.name,
+      description: product.short,
+      image: product.images.map(i => origin + '/' + i),
+      brand: { '@type': 'Brand', name: 'Hatay Hasadı' },
+      offers: {
+        '@type': 'AggregateOffer',
+        priceCurrency: 'TRY',
+        lowPrice: Math.min(...prices),
+        highPrice: Math.max(...prices),
+        offerCount: product.sizes.length,
+        availability: 'https://schema.org/InStock',
+        url: origin + '/urun.html?id=' + product.id
+      }
+    };
+    if (reviews && reviews.length) {
+      ld.aggregateRating = {
+        '@type': 'AggregateRating',
+        ratingValue: (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1),
+        reviewCount: reviews.length
+      };
+    }
+    ldScript.textContent = JSON.stringify(ld);
+  }
+  updateJsonLd([]);
   document.getElementById('crumbName').textContent = product.name;
   document.getElementById('pBadge').textContent = product.badge;
   document.getElementById('pTitle').textContent = product.name;
@@ -341,6 +378,7 @@
 
     try {
       const reviews = await HHAuth.getReviews(product.id);
+      updateJsonLd(reviews);
       reviewsTabBtn.textContent = reviews.length ? `Yorumlar (${reviews.length})` : 'Yorumlar';
       if (reviews.length) {
         const avg = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
