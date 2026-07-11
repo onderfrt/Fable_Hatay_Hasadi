@@ -50,6 +50,19 @@ const HHAuth = (() => {
     if (client) await client.auth.signOut();
   }
 
+  /** Şifre sıfırlama e-postası gönderir; bağlantı hesap.html'e döner. */
+  async function resetPassword(email) {
+    const redirectTo = location.origin + location.pathname.replace(/[^/]*$/, '') + 'hesap.html';
+    const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo });
+    if (error) throw error;
+  }
+
+  /** Kurtarma bağlantısından gelen oturum için yeni şifre belirler. */
+  async function updatePassword(newPassword) {
+    const { error } = await client.auth.updateUser({ password: newPassword });
+    if (error) throw error;
+  }
+
   /* ---------- Profil ---------- */
   async function getProfile() {
     const user = await getUser();
@@ -117,6 +130,17 @@ const HHAuth = (() => {
     return data || [];
   }
 
+  /** Ana sayfa vitrini için en yüksek puanlı son yorumlar. */
+  async function getTopReviews(limit = 3) {
+    if (!client) return [];
+    const { data } = await client.from('reviews')
+      .select('product_id, display_name, rating, comment, created_at')
+      .order('rating', { ascending: false })
+      .order('created_at', { ascending: false })
+      .limit(limit);
+    return data || [];
+  }
+
   async function addReview(productId, rating, comment) {
     const user = await getUser();
     if (!user) throw new Error('Yorum yapabilmek için giriş yapmalısınız.');
@@ -161,11 +185,21 @@ const HHAuth = (() => {
   /* ---------- Başlatma ---------- */
   async function init() {
     if (!isConfigured()) return;
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // URL'yi normalize et: yanlışlıkla eklenen /rest/v1 gibi yolları
+    // ve sondaki eğik çizgileri temizle (istemci yolları kendisi ekler)
+    const baseUrl = SUPABASE_URL
+      .replace(/\/(rest|auth|storage|realtime|functions)\/v\d+\/?$/i, '')
+      .replace(/\/+$/, '');
+    client = window.supabase.createClient(baseUrl, SUPABASE_ANON_KEY);
     injectNavLink();
     const { data: { session } } = await client.auth.getSession();
     updateNavLink(session);
-    client.auth.onAuthStateChange((_event, s) => updateNavLink(s));
+    client.auth.onAuthStateChange((event, s) => {
+      updateNavLink(s);
+      if (event === 'PASSWORD_RECOVERY') {
+        document.dispatchEvent(new CustomEvent('hh-password-recovery'));
+      }
+    });
     document.dispatchEvent(new CustomEvent('hh-auth-ready'));
   }
 
@@ -174,8 +208,9 @@ const HHAuth = (() => {
   return {
     isConfigured, isReady, getClient, getUser,
     signUp, signIn, signOut,
+    resetPassword, updatePassword,
     getProfile, updateProfile,
     saveOrder, getMyOrders,
-    getReviews, addReview
+    getReviews, getTopReviews, addReview
   };
 })();

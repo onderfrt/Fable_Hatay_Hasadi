@@ -231,6 +231,21 @@
   .prd-name-link:hover { color: var(--green-dk); text-decoration: underline; text-underline-offset: 3px; }
   #one-cikan .oo-cta-ghost { background: transparent; color: var(--gold-lt); border: 1.5px solid rgba(232,201,122,0.5); }
   #one-cikan .oo-cta-ghost:hover { background: rgba(232,201,122,0.12); }
+  .size-row.selectable { cursor: pointer; border-radius: 8px; padding: 4px 8px; margin: 0 -8px; transition: background 0.15s; }
+  .size-row.selectable:hover { background: rgba(92,122,46,0.06); }
+  .size-row.selectable .size-label::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(92,122,46,0.4); margin-right: 7px; vertical-align: -1px; transition: all 0.15s; }
+  .size-row.selectable.sel .size-label::before { border-color: var(--green); background: var(--green); box-shadow: inset 0 0 0 2.5px var(--cream); }
+
+  /* SSS */
+  #sss { background: var(--white); }
+  .faq-list { max-width: 760px; margin: 2.5rem auto 0; }
+  .faq-item { border: 1px solid rgba(92,122,46,0.15); border-radius: 12px; background: var(--cream); margin-bottom: 0.75rem; overflow: hidden; }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 1rem 1.25rem; font-size: 14.5px; font-weight: 700; color: var(--brown); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 20px; color: var(--green); font-weight: 400; transition: transform 0.2s; flex-shrink: 0; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p { padding: 0 1.25rem 1.1rem; font-size: 13.5px; color: var(--text-lt); line-height: 1.8; }
+  .faq-item a { color: var(--green); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -483,6 +498,46 @@
   </div>
 </section>
 
+<!-- SSS -->
+<section id="sss">
+  <div class="container">
+    <div style="text-align:center;">
+      <p class="section-label">Merak Edilenler</p>
+      <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+    </div>
+    <div class="faq-list fade-in">
+      <details class="faq-item">
+        <summary>Siparişim ne kadar sürede elime ulaşır?</summary>
+        <p>Siparişiniz 1-2 iş günü içinde kargoya verilir ve kargo takip numaranız WhatsApp üzerinden paylaşılır. Kargo firmasının teslim süresi bölgenize göre 1-3 iş günüdür.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kargo ücreti ne kadar?</summary>
+        <p>1.500 ₺ ve üzeri siparişlerde kargo tamamen ücretsizdir. Bu tutarın altındaki siparişlerde kargo firmasının güncel tarifesi uygulanır.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Ödemeyi nasıl yapabilirim?</summary>
+        <p>Şu an ödemeler havale/EFT (IBAN) ile alınmaktadır; sipariş sonrası IBAN bilgimiz WhatsApp'tan iletilir. Kredi kartıyla online ödeme çok yakında eklenecektir.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Ürünleriniz gerçekten katkısız mı?</summary>
+        <p>Evet. Ürünlerimizde boyar madde, koruyucu veya dolgu maddesi bulunmaz. Baharatlarımız doğrudan Hatay'daki güvendiğimiz üreticilerden temin edilir ve kendi markamızla paketlenir.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Baharatları nasıl saklamalıyım?</summary>
+        <p>Serin, kuru ve güneş almayan bir yerde, ağzı kapalı kapta saklamanızı öneririz. Bu koşullarda ürünlerimiz 12 ay boyunca tazeliğini korur. Kraft doypack ambalajımız kilitli yapısıyla saklamaya uygundur.</p>
+      </details>
+      <details class="faq-item">
+        <summary>İade veya değişim yapabilir miyim?</summary>
+        <p>Ambalajı açılmamış ürünlerinizi teslimattan itibaren 14 gün içinde iade edebilirsiniz. Gıda güvenliği gereği ambalajı açılmış ürünlerde iade kabul edilememektedir. Hasarlı ulaşan paketler için fotoğrafla birlikte bize WhatsApp'tan ulaşmanız yeterlidir.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Restoranım için toplu alım yapabilir miyim?</summary>
+        <p>Elbette! 500 gr, 1 kg ve üzeri paketleme seçenekleri ve özel B2B fiyatlarımız mevcut. Detaylar için <a href="#toplu-siparis">Toplu Sipariş</a> bölümüne göz atın.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- B2B -->
 <section id="toplu-siparis">
   <div class="container">
@@ -528,8 +583,8 @@
 
   /* Ürün kartları */
   const cardsHtml = spices.map(p => {
-    const rows = p.sizes.map(s => `
-            <div class="size-row">
+    const rows = p.sizes.map((s, si) => `
+            <div class="size-row selectable${si === 0 ? ' sel' : ''}" data-size="${si}" role="radio" aria-checked="${si === 0}">
               <span class="size-label">${s.label}</span>
               <div class="size-prices">${s.old ? `<span class="old-price">${formatTL(s.old)}</span>` : ''}<span class="new-price">${formatTL(s.price)}</span>${s.old ? `<span class="disc-tag">%${discountPct(s.old, s.price)}</span>` : ''}</div>
             </div>`).join('');
@@ -544,14 +599,33 @@
           </div>
           <div class="order-row">
             <a class="btn-detail" href="urun.html?id=${p.id}">İncele</a>
-            <button class="product-order-btn" onclick="HHCart.add('${p.id}', 0, 1)">Sepete Ekle</button>
+            <button class="product-order-btn" data-add="${p.id}">Sepete Ekle</button>
           </div>
         </div>
       </div>`;
   }).join('');
+  const grid = document.getElementById('productGrid');
   const yakinda = document.getElementById('yakindaCard');
   if (yakinda) yakinda.insertAdjacentHTML('beforebegin', cardsHtml);
-  else document.getElementById('productGrid').innerHTML = cardsHtml;
+  else grid.innerHTML = cardsHtml;
+
+  // Boyut seçimi ve sepete ekleme (event delegation)
+  grid.addEventListener('click', (e) => {
+    const row = e.target.closest('.size-row.selectable');
+    if (row) {
+      const card = row.closest('.product-card');
+      card.querySelectorAll('.size-row').forEach(r => { r.classList.remove('sel'); r.setAttribute('aria-checked', 'false'); });
+      row.classList.add('sel');
+      row.setAttribute('aria-checked', 'true');
+      card.dataset.size = row.dataset.size;
+      return;
+    }
+    const btn = e.target.closest('[data-add]');
+    if (btn) {
+      const card = btn.closest('.product-card');
+      HHCart.add(btn.dataset.add, parseInt(card.dataset.size || '0', 10), 1);
+    }
+  });
 
   /* Fiyat tablosu */
   const badgeIds = ['isot', 'sumak', 'zahter'];
@@ -562,6 +636,28 @@
     return `<tr><td><a class="prd-name-link" href="urun.html?id=${p.id}"><span class="prd-name">${p.name}</span></a>${badge}</td>${cells}</tr>`;
   }).join('');
 })();
+
+// Gerçek müşteri yorumları: Supabase hazır olduğunda statik örneklerin yerini alır
+document.addEventListener('hh-auth-ready', async () => {
+  try {
+    const top = await HHAuth.getTopReviews(3);
+    if (!top.length) return; // henüz gerçek yorum yoksa örnekler kalır
+    const starStr = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+    const esc = s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
+    const grid = document.querySelector('.testimonial-grid');
+    if (!grid) return;
+    grid.innerHTML = top.map(r => {
+      const p = getProduct(r.product_id);
+      const initials = r.display_name.split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      return `
+      <div class="testimonial-card fade-in visible">
+        <div class="testimonial-stars">${starStr(r.rating)}</div>
+        <div class="testimonial-text">"${esc(r.comment)}"</div>
+        <div class="testimonial-author"><div class="testimonial-avatar">${initials}</div><div><div class="testimonial-name">${esc(r.display_name)}</div><div class="testimonial-role">${p ? p.name : 'Hatay Hasadı'} aldı · Doğrulanmış müşteri</div></div></div>
+      </div>`;
+    }).join('');
+  } catch (e) { /* sessizce statik örneklerle devam */ }
+});
 </script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Scroll to top button

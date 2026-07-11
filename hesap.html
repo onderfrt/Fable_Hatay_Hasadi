@@ -62,6 +62,8 @@
   .empty-orders { text-align: center; color: var(--text-lt); font-size: 14px; padding: 1.5rem 1rem; }
   .empty-orders a { color: var(--green); font-weight: 700; }
 
+  .link-btn { display: block; margin: 0.9rem auto 0; background: none; border: none; font-size: 13px; color: var(--green-dk); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-family: inherit; }
+  .link-btn:hover { color: var(--green); }
   .hidden { display: none !important; }
   .loading { text-align: center; color: var(--text-lt); padding: 3rem 1rem; }
 
@@ -98,6 +100,14 @@
         <div class="field"><label for="liEmail">E-posta</label><input id="liEmail" type="email" required autocomplete="email"></div>
         <div class="field"><label for="liPass">Şifre</label><input id="liPass" type="password" required autocomplete="current-password"></div>
         <button class="btn-full" type="submit">Giriş Yap</button>
+        <button class="link-btn" type="button" id="btnForgot">Şifremi unuttum</button>
+      </form>
+
+      <form id="formForgot" class="hidden">
+        <p style="font-size:13.5px;color:var(--text-lt);margin-bottom:1rem;">E-posta adresinizi girin; şifre sıfırlama bağlantısı gönderelim.</p>
+        <div class="field"><label for="fgEmail">E-posta</label><input id="fgEmail" type="email" required autocomplete="email"></div>
+        <button class="btn-full" type="submit">Sıfırlama Bağlantısı Gönder</button>
+        <button class="link-btn" type="button" id="btnBackLogin">← Girişe dön</button>
       </form>
 
       <form id="formRegister" class="hidden">
@@ -106,6 +116,19 @@
         <div class="field"><label for="rgEmail">E-posta</label><input id="rgEmail" type="email" required autocomplete="email"></div>
         <div class="field"><label for="rgPass">Şifre (en az 6 karakter)</label><input id="rgPass" type="password" required minlength="6" autocomplete="new-password"></div>
         <button class="btn-full" type="submit">Üye Ol</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Yeni şifre belirleme (e-postadaki bağlantıdan gelindiğinde) -->
+  <div id="viewRecovery" class="hidden">
+    <div class="card auth-card">
+      <h2>Yeni Şifre Belirleyin</h2>
+      <div class="msg" id="recoveryMsg"></div>
+      <form id="formRecovery">
+        <div class="field"><label for="rcPass">Yeni Şifre (en az 6 karakter)</label><input id="rcPass" type="password" required minlength="6" autocomplete="new-password"></div>
+        <div class="field"><label for="rcPass2">Yeni Şifre (tekrar)</label><input id="rcPass2" type="password" required minlength="6" autocomplete="new-password"></div>
+        <button class="btn-full" type="submit">Şifreyi Güncelle</button>
       </form>
     </div>
   </div>
@@ -143,7 +166,7 @@
 <script src="js/cart.js"></script>
 <script>
 (function () {
-  const views = ['viewLoading', 'viewSetup', 'viewAuth', 'viewAccount'];
+  const views = ['viewLoading', 'viewSetup', 'viewAuth', 'viewAccount', 'viewRecovery'];
   function show(id) {
     views.forEach(v => document.getElementById(v).classList.toggle('hidden', v !== id));
   }
@@ -261,6 +284,49 @@
       await HHAuth.updateProfile(document.getElementById('pfName').value.trim(), document.getElementById('pfPhone').value.trim());
       setMsg(profileMsg, 'Bilgileriniz güncellendi ✓', 'ok');
     } catch (e) { setMsg(profileMsg, 'Güncellenemedi: ' + e.message, 'err'); }
+  });
+
+  /* Şifremi unuttum */
+  const formForgot = document.getElementById('formForgot');
+  document.getElementById('btnForgot').addEventListener('click', () => {
+    formLogin.classList.add('hidden');
+    formForgot.classList.remove('hidden');
+    document.getElementById('fgEmail').value = document.getElementById('liEmail').value;
+    setMsg(authMsg, '');
+  });
+  document.getElementById('btnBackLogin').addEventListener('click', () => {
+    formForgot.classList.add('hidden');
+    formLogin.classList.remove('hidden');
+    setMsg(authMsg, '');
+  });
+  formForgot.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = formForgot.querySelector('button[type=submit]'); btn.disabled = true;
+    try {
+      await HHAuth.resetPassword(document.getElementById('fgEmail').value.trim());
+      setMsg(authMsg, 'Sıfırlama bağlantısı e-postanıza gönderildi. Gelen kutunuzu (ve spam klasörünü) kontrol edin.', 'ok');
+    } catch (err) {
+      setMsg(authMsg, 'Bağlantı gönderilemedi: ' + err.message, 'err');
+    } finally { btn.disabled = false; }
+  });
+
+  /* Kurtarma bağlantısından gelindiğinde yeni şifre formu */
+  document.addEventListener('hh-password-recovery', () => show('viewRecovery'));
+  const formRecovery = document.getElementById('formRecovery');
+  const recoveryMsg = document.getElementById('recoveryMsg');
+  formRecovery.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const p1 = document.getElementById('rcPass').value;
+    const p2 = document.getElementById('rcPass2').value;
+    if (p1 !== p2) { setMsg(recoveryMsg, 'Şifreler birbiriyle uyuşmuyor.', 'err'); return; }
+    const btn = formRecovery.querySelector('button'); btn.disabled = true;
+    try {
+      await HHAuth.updatePassword(p1);
+      setMsg(recoveryMsg, 'Şifreniz güncellendi! Hesabınıza yönlendiriliyorsunuz…', 'ok');
+      setTimeout(render, 1200);
+    } catch (err) {
+      setMsg(recoveryMsg, 'Güncellenemedi: ' + err.message, 'err');
+    } finally { btn.disabled = false; }
   });
 
   /* Çıkış */
