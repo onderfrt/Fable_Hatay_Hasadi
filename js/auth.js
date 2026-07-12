@@ -160,6 +160,47 @@ const HHAuth = (() => {
     }
   }
 
+  /* ---------- Yönetim paneli (admin) ---------- */
+  async function isAdmin() {
+    const user = await getUser();
+    if (!user) return false;
+    const { data } = await client.from('profiles').select('is_admin').eq('id', user.id).single();
+    return !!(data && data.is_admin);
+  }
+
+  /** Tüm siparişler + müşteri bilgisi (yalnızca admin RLS'i geçer). */
+  async function getAllOrders() {
+    const { data: orders, error } = await client.from('orders')
+      .select('id, order_no, status, total, created_at, user_id, order_items ( product_name, size_label, qty, unit_price )')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    if (!orders || !orders.length) return [];
+    const ids = [...new Set(orders.map(o => o.user_id))];
+    const { data: profiles } = await client.from('profiles')
+      .select('id, full_name, phone, email').in('id', ids);
+    const byId = Object.fromEntries((profiles || []).map(p => [p.id, p]));
+    return orders.map(o => ({ ...o, customer: byId[o.user_id] || null }));
+  }
+
+  async function updateOrderStatus(orderId, status) {
+    const { error } = await client.from('orders').update({ status }).eq('id', orderId);
+    if (error) throw error;
+  }
+
+  /** Moderasyon için tüm yorumlar (id dahil). */
+  async function getAllReviewsAdmin() {
+    const { data, error } = await client.from('reviews')
+      .select('id, product_id, display_name, rating, comment, created_at')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data || [];
+  }
+
+  async function deleteReview(reviewId) {
+    const { error } = await client.from('reviews').delete().eq('id', reviewId);
+    if (error) throw error;
+  }
+
   /* ---------- Nav entegrasyonu ---------- */
   function updateNavLink(session) {
     const link = document.getElementById('hhAuthLink');
@@ -210,6 +251,7 @@ const HHAuth = (() => {
     signUp, signIn, signOut,
     resetPassword, updatePassword,
     getProfile, updateProfile,
+    isAdmin, getAllOrders, updateOrderStatus, getAllReviewsAdmin, deleteReview,
     saveOrder, getMyOrders,
     getReviews, getTopReviews, addReview
   };

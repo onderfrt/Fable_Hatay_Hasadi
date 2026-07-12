@@ -137,7 +137,10 @@
   <div id="viewAccount" class="hidden">
     <div class="account-head">
       <h1 class="page-title" style="margin-bottom:0;">Hesabım</h1>
-      <button class="btn-ghost" id="btnLogout">Çıkış Yap</button>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+        <a class="btn-ghost hidden" id="btnAdmin" href="yonetim.html" style="text-decoration:none;border-color:var(--green);color:var(--green-dk);">⚙ Yönetim Paneli</a>
+        <button class="btn-ghost" id="btnLogout">Çıkış Yap</button>
+      </div>
     </div>
 
     <div class="card">
@@ -201,6 +204,9 @@
     show('viewAccount');
     loadProfile();
     loadOrders();
+    HHAuth.isAdmin().then(ok => {
+      document.getElementById('btnAdmin').classList.toggle('hidden', !ok);
+    }).catch(() => {});
   }
 
   async function loadProfile() {

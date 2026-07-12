@@ -50,13 +50,24 @@ mesajı gösterir).
 - Canlıda açık tutmanız önerilir. **Authentication → Email Templates**
   bölümünden e-posta metinlerini Türkçeleştirebilirsiniz.
 
-## 5. Sipariş durumlarını yönetme
+## 5. Yönetim paneli kurulumu
 
-Siparişler `alindi` durumuyla kaydedilir. Kargoya verdiğinizde Supabase
-**Table Editor → orders** üzerinden `status` alanını güncelleyin;
-müşteri Hesabım sayfasında güncel durumu görür.
+1. [`supabase/admin-schema.sql`](supabase/admin-schema.sql) dosyasını SQL
+   Editor'de çalıştırın (ana şemadan **sonra**).
+2. Dosyanın en altındaki yorumlu `update` satırındaki e-postayı kendi üyelik
+   e-postanızla değiştirip çalıştırın — hesabınız yönetici olur.
+3. Siteye giriş yaptıktan sonra **Hesabım** sayfasındaki "⚙ Yönetim Paneli"
+   butonundan veya doğrudan `/yonetim.html` adresinden panele girin.
 
-Geçerli durumlar: `alindi` · `hazirlaniyor` · `kargoda` · `teslim` · `iptal`
+Panelde yapabilecekleriniz:
+- Tüm siparişleri görüntüleme; durum güncelleme (Alındı → Hazırlanıyor →
+  Kargoda → Teslim / İptal) — müşteri Hesabım sayfasında anında görür
+- Duruma göre filtreleme, sipariş no / müşteri adı ile arama
+- Müşterinin telefonuna tek tıkla WhatsApp açma
+- Toplam sipariş / bekleyen / kargoda / ciro istatistikleri
+- Yorum moderasyonu (uygunsuz yorumları silme)
+
+Geçerli sipariş durumları: `alindi` · `hazirlaniyor` · `kargoda` · `teslim` · `iptal`
 
 ## Mimari not (.NET tarafı için)
 
@@ -77,4 +88,6 @@ katmanı eklemek isterseniz:
 | `js/auth.js` | Kayıt/giriş/çıkış, profil, sipariş kaydetme-okuma, yorum API'si |
 | `js/cart.js` | Sepet; girişli kullanıcıda siparişi veritabanına yazar |
 | `hesap.html` | Giriş/kayıt formları, profil ve sipariş geçmişi sayfası |
+| `yonetim.html` | Yönetim paneli: sipariş takibi, durum güncelleme, yorum moderasyonu |
+| `supabase/admin-schema.sql` | Admin rolü + yönetici RLS politikaları |
 | `supabase/schema.sql` | Veritabanı şeması + RLS politikaları |

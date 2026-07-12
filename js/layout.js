@@ -51,7 +51,7 @@ const HHLayout = (() => {
     <div class="footer-brand"><h3>Hatay Hasadı</h3><p>Topraktan gelen lezzeti, Hatay'dan sofralarınıza taşıyoruz. Katkısız, standart kalite, güvenilir tedarik.</p></div>
     <div class="footer-col"><h4>Ürünler</h4><a href="urun.html?id=isot">İsot Biberi</a><a href="urun.html?id=sumak">Sumak</a><a href="urun.html?id=zahter">Zahter</a><a href="${pre}#urunler">Tüm Ürünler</a></div>
     <div class="footer-col"><h4>Bilgi</h4><a href="${pre}#hakkimizda">Hakkımızda</a><a href="${pre}#nasil-siparis">Nasıl Sipariş?</a><a href="${pre}#sss">S.S.S.</a><a href="${pre}#toplu-siparis">Toplu Sipariş</a><a href="hesap.html">Hesabım</a></div>
-    <div class="footer-col"><h4>İletişim</h4><a href="https://wa.me/905441230776" target="_blank">WhatsApp</a><a href="https://instagram.com/hatayhasadi" target="_blank">Instagram</a><a href="/cdn-cgi/l/email-protection#fb92959d94bb939a8f9a82939a889a9f92d5989496">E-posta</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="https://wa.me/905441230776" target="_blank">WhatsApp</a><a href="https://instagram.com/hatayhasadi" target="_blank">Instagram</a><a href="mailto:info@hatayhasadi.com">E-posta</a></div>
   </div>
   <div class="footer-bottom">
     <span>© 2025 Hatay Hasadı. Tüm hakları saklıdır.</span>
@@ -83,6 +83,14 @@ const HHLayout = (() => {
     document.body.insertAdjacentHTML('afterbegin', navHtml());
     document.body.insertAdjacentHTML('beforeend', footerHtml());
     initMobileMenu();
+
+    // Vercel Web Analytics (dashboard'dan Analytics etkinleştirildiğinde çalışır)
+    if (location.protocol.startsWith('http')) {
+      const va = document.createElement('script');
+      va.defer = true;
+      va.src = '/_vercel/insights/script.js';
+      document.head.appendChild(va);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', inject);
