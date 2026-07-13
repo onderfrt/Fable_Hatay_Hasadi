@@ -216,7 +216,7 @@ const PRODUCTS = [
     id: "kisnis",
     name: "Kişniş",
     badge: "Klasik",
-    images: ["images/Kisnis.webp"],
+    images: ["images/Kisnis.webp", "images/Kisnis-2.webp"],
     short: "Limonumsu ve hafif baharatlı aromasıyla et yemeklerinde, çorbalarda ve turşularda.",
     description: "Kişniş tohumlarının öğütülmesiyle hazırlanır. Limonumsu, hafif tatlı aroması ile et yemeklerine, çorbalara ve turşulara incelikli bir tat katar. Dünya mutfaklarında köri karışımlarının da temel bileşenidir.",
     benefits: [

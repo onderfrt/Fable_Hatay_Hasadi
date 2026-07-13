@@ -75,6 +75,10 @@ console.log('\nANA SAYFA');
   await p.waitForTimeout(500);
   check('gerçek yorumlar vitrine yükleniyor', (await p.locator('.testimonial-card').first().textContent()).includes('Test K.'));
 
+  // Çoklu fotoğraflı üründe kartta ikinci görsel (hover geçişi)
+  const kisnisCard = p.locator('.product-icon-wrap[href="urun.html?id=kisnis"]');
+  check('kartta ikinci görsel (hover) hazır', await kisnisCard.locator('.pi-b').count() === 1);
+
   // Footer e-posta linki (Vercel uyumu)
   const mailto = await p.evaluate(() => {
     const a = [...document.querySelectorAll('footer a')].find(x => x.textContent === 'E-posta');
@@ -93,6 +97,20 @@ console.log('\nMOBİL');
   await p.click('#hamburgerBtn');
   await p.waitForTimeout(500);
   check('hamburger menü açılıyor', await p.locator('.nav-links.active').count() === 1);
+  await p.evaluate(() => document.getElementById('mobileOverlay').click());
+  await p.waitForTimeout(400);
+  const cols = await p.evaluate(() =>
+    getComputedStyle(document.getElementById('productGrid')).gridTemplateColumns.split(' ').length);
+  check('telefonda 2 sütunlu ürün ızgarası', cols === 2);
+
+  // Ürün sayfası: yapışkan satın alma çubuğu
+  await p.goto(url('urun.html') + '?id=isot');
+  await p.waitForTimeout(1500);
+  check('mobil satın alma çubuğu görünür', await p.locator('#mobileBuyBar').isVisible());
+  check('çubukta fiyat var', (await p.locator('#mbPrice').textContent()).includes('₺'));
+  await p.click('#mbAdd');
+  await p.waitForTimeout(400);
+  check('çubuktan sepete ekleniyor', (await p.locator('#hhCartCount').textContent()) === '1');
   await p.close();
 }
 
@@ -152,6 +170,22 @@ console.log('\nÜRÜN DETAY');
   await p.evaluate(async () => { HHAuth.getUser = async () => null; await window.HHReviewsRefresh(); });
   await p.waitForTimeout(400);
   check('girişsiz kullanıcıya giriş çağrısı', await p.locator('.review-cta').count() === 1);
+
+  // Çoklu fotoğraf galerisi (kişniş: 2 görsel)
+  await p.goto(url('urun.html') + '?id=kisnis');
+  await p.waitForTimeout(1500);
+  check('galeri noktaları (2 görsel)', await p.locator('#gDots span').count() === 2);
+  check('galeri okları görünür', await p.locator('#gNext').isVisible());
+  await p.click('#gNext');
+  await p.waitForTimeout(400);
+  check('ok ile görsel değişiyor', await p.locator('#gDots span.on').evaluate(el => [...el.parentElement.children].indexOf(el)) === 1);
+  await p.click('#galleryMain0');
+  await p.waitForTimeout(400);
+  check('lightbox açılıyor', await p.locator('.lightbox.open').count() === 1);
+  check('lightbox sayaç 2/2', (await p.locator('#lbCount').textContent()) === '2 / 2');
+  await p.keyboard.press('Escape');
+  await p.waitForTimeout(300);
+  check('lightbox ESC ile kapanıyor', await p.locator('.lightbox.open').count() === 0);
 
   // Bilinmeyen ürün
   await p.goto(url('urun.html') + '?id=olmayan-urun');
